@@ -1,0 +1,91 @@
+
+<ion-content>
+
+  <ion-segment (ionChange)="segmentChanged($event)"  value="all" class="segment-user" slot="fixed"  >
+    <ion-segment-button value="all">
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pharmacies">
+      <ion-label>Pharmacies</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="patients">
+      <ion-label>Patients</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-grid>
+    <ion-row *ngIf="currentUser && currentSegmentType == 'recieved'">
+      <ion-col size="12" size-md="8" offset-md="2">
+        <ion-card class="card" *ngFor="let message of messagesTotalReceived[currentSegmentUser]">
+          <ion-item lines="none" class="profile-holder">
+            <ion-avatar class="img">
+              <img *ngIf="message.from.role == 'pharmacy'  && message.from.imageUrl == ''" src="../../../../assets/imgs/pharmacy-user-img.png">
+              <img *ngIf="message.from.role == 'patient'   && message.from.imageUrl == ''" src="../../../../assets/imgs/patient.svg">
+              <img *ngIf="message && message.from.imageUrl != ''" [src]="message.from.imageUrl">
+            </ion-avatar>
+            <div class="header">
+            <ion-text class="name">
+              {{message.from.firstname}} {{message.from.lastname}}
+            </ion-text>
+            <ion-icon name="chatbubbles-outline" class="send-message" slot="end" (click)="callSendMessageController(message.from)"></ion-icon>
+            <ion-text class="date">
+              
+            </ion-text>
+          </div>
+          </ion-item>
+          <ion-item class="description" lines="none">
+            <ion-textarea class="text"  [value]="message.message" rows="5" [disabled]="true">
+  
+            </ion-textarea>
+          </ion-item>
+          
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="currentUser && currentSegmentType == 'sent'">
+      <ion-col size="12" size-md="8" offset-md="2">
+        <ion-card class="card" *ngFor="let message of messagesTotalSent[currentSegmentUser]">
+          <ion-item lines="none" class="profile-holder">
+            <ion-avatar class="img">
+              <img *ngIf="message.to.role == 'pharmacy'  && message.to.imageUrl == ''" src="../../../../assets/imgs/pharmacy-user-img.png">
+              <img *ngIf="message.to.role == 'patient'   && message.to.imageUrl == ''" src="../../../../assets/imgs/patient.svg">
+              <img *ngIf="message && message.to.imageUrl != ''" [src]="message.to.imageUrl">
+            </ion-avatar>
+            <div class="header">
+            <ion-text class="name">
+              {{message.to.firstname}} {{message.to.lastname}}
+            </ion-text>
+            <ion-text class="date">
+              
+            </ion-text>
+          </div>
+          </ion-item>
+          <ion-item class="description" lines="none">
+            <ion-textarea class="text"  [value]="message.message" rows="5" [disabled]="true">
+  
+            </ion-textarea>
+          </ion-item>
+          
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <div class="spin" *ngIf="!currentUser">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+
+  <ion-segment (ionChange)="segmentChanged1($event)"  value="recieved"  class="segment-type"  slot="fixed" >
+    <ion-segment-button value="recieved">
+      <ion-icon name="chevron-down-circle-outline"></ion-icon>
+      <ion-label>Recieved</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="sent">
+      <ion-icon name="paper-plane-outline"></ion-icon>      
+      <ion-label>Sent</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  
+  </ion-content>
+  

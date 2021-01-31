@@ -1,0 +1,70 @@
+<app-header [page]="'Referals'" [type]="'page'"></app-header>
+
+
+<ion-content>
+  <ion-grid *ngIf="currentUser && comission">
+    <ion-row *ngFor="let referal of referals">
+      <ion-col size="12">
+        <ion-card lines="none" class="card" *ngIf="referal.owner && referal" (click)="referalDetail(referal)">
+          <div class="main-container">
+            <div class="container" style="width: 20%;">
+              <img class="avatar-icon" *ngIf="referal.owner.imageUrl != '' "
+                [src]="referal.owner.imageUrl" width="50px" height="50px">
+              <img class="avatar-icon" *ngIf="referal.owner.imageUrl == '' "
+                src="../../../assets/imgs/patient.svg" width="50px" height="50px">
+            </div>
+            <div class="container-info">
+
+              <div class="header">
+                <ion-label  class="label"
+                  *ngIf="referal.owner && referal.owner.firstname != ''">
+                  <h1>{{referal.owner.firstname}}</h1>
+                </ion-label>
+                <ion-label  class="label"
+                  *ngIf="referal.owner.username && referal.owner.username == ''">
+                  <h1>Patient</h1>
+                </ion-label>
+
+
+              </div>
+              
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  name="link-outline"></ion-icon> : Code : {{referal.code != null ? referal.code : "Referal Code"}}
+                </ion-label>
+              </div>
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  name="pricetags-outline"></ion-icon> : Commision {{comission.commission}}
+                </ion-label>
+              </div>
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  name="mail-outline"></ion-icon> : {{referal.owner.email != null ? referal.owner.email : "Email"}}
+                </ion-label>
+              </div>
+              
+
+
+
+            </div>
+            <hr>
+            
+
+            <div class="main-container bottom">
+                <div class="price">
+                  <ion-label class="inner-item">
+                    <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{'PAID:' + countTotalPrice(referal).PAID + ' , UNPAID:' + countTotalPrice(referal).NPAID}}
+                  </ion-label>
+                </div>
+          </div>
+          </div>
+      </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <div class="spin" *ngIf="!currentUser && noRef != undefined">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+</ion-content>

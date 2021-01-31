@@ -1,0 +1,8 @@
+<app-header [page]="'Add Product'" [type]="'page'" *ngIf="type == 'edit-product'"></app-header>
+
+<ion-content>
+  
+  <app-edit-product *ngIf="type == 'edit-product' && user && currentProduct != null" [mainProduct]='currentProduct' [user]="user" [currentProduct]="currentProduct" [type]="'addproduct'" ></app-edit-product>
+
+  <app-add-product-to-category *ngIf="user && category && type == 'add-product'" [category]='category' [user]="user"></app-add-product-to-category>
+</ion-content>

@@ -1,0 +1,57 @@
+<app-header [page]="'Add Category'" [type]="'page'"></app-header>
+
+<ion-content>
+
+  <ion-slides class="center-row"  [options]='slideOpts' *ngIf='user' #slides class="swiper-no-swiping slides">
+    <ion-slide class="slide intro-slide" >
+       <ion-label class="intro">Adding Categories Will help you Structure Your Medecins</ion-label>
+       <ion-button class="buttons" (click)='next()'>
+         <ion-label>Start</ion-label>
+       </ion-button>
+    </ion-slide>
+    <ion-slide class="slide">
+      <form novalidate  [formGroup]="categoryForm"  class="form" (ngSubmit)="addCategory()" data-aos="fade-up">
+        <ion-item lines="none" class="ion-input" data-aos="fade-up" data-aos-duration="3000">
+          <ion-icon src="../../../assets/imgs/capsules.svg"></ion-icon>
+          <ion-input placeHolder="Category Name" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-label class="label-error" *ngIf="formErrors && formErrors.name">*{{formErrors.name}}</ion-label>
+    
+        <ion-item lines="none" class="ion-input">
+          <ion-icon src="../../../assets/imgs/capsules.svg"></ion-icon>
+          <ion-input placeHolder="Category Description" formControlName="description"></ion-input>
+        </ion-item>
+        <ion-label class="label-error" *ngIf="formErrors && formErrors.description">*{{formErrors.description}}</ion-label>
+        <ion-button class="buttons" [disabled]="categoryForm.invalid || submitted" (click)="addCategory()" shape="round" size="default" expand="full" *ngIf="currentCategory == null">
+          <ion-label *ngIf="!submitted">Add Category</ion-label>
+          <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+        </ion-button>
+      </form>
+     </ion-slide>
+    <ion-slide class="slide intro-slide">
+     <ion-label class="intro ">Choose an image</ion-label>
+     <ion-avatar class="avatar">
+      <img *ngIf="!currentCategory || currentCategory.imageUrl == '' " src="../../../assets/imgs/medicine.png">
+      <img *ngIf="currentCategory && currentCategory.imageUrl != ''" [src]="currentCategory.imageUrl">
+       <div class="rounded-input" >
+        <label for="files" class="btn"><ion-icon name="camera-outline"></ion-icon></label>
+        <input id="files" type="file" style="visibility:hidden;"  (change)="selectedImage($event)" >
+      </div>
+     </ion-avatar>
+    </ion-slide>
+  
+  </ion-slides>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="currentSlide > 0 && currentSlide < 2 && currentCategory != null">
+    <ion-fab-button (click)="next()">
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="currentSlide == 2 && currentCategory != null">
+    <ion-fab-button (click)="finish()" >
+      <ion-icon src="../../../assets/imgs/thumbs-up.svg"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+</ion-content>
+

@@ -1,0 +1,27 @@
+<app-header [page]="'Update Commission'" [type]="'modal'"></app-header>
+
+
+<ion-grid >
+  <ion-row>
+    <ion-col size="12">
+      <ion-title class="title-patient">Update Referal Commission en %</ion-title>
+      <ion-title class="title-patient">Commission :  {{commission.name}}</ion-title>
+      <ion-item lines="none" class="ion-input">
+        <ion-icon src="../../../assets/imgs/commission.svg"></ion-icon>
+        <ion-input type="number" [(ngModel)]="commission.commission"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col size="12">
+      <ion-button class="buttons" [disabled]="commission.commission == 0 || commission.commission == null || submitted" (click)="updateCommission()" shape="round" size="default" expand="full">
+        <ion-label *ngIf="!submitted">Update Referal Commision </ion-label>
+        <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+      </ion-button>
+    </ion-col>
+    <ion-col size="12">
+      <ion-button class="buttons" [disabled]="submitted" (click)="back()" shape="round" size="default" expand="full">
+        <ion-label *ngIf="!submitted">Back</ion-label>
+        <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

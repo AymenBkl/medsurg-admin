@@ -1,0 +1,97 @@
+.rounded-input {
+    display: flex;
+    position: absolute;
+    color: #2B91BF;
+    font-size: 40px;
+    width: 100%;
+    top: 80%;
+    left: 38%;
+    text-align: center;
+  }
+
+  .btn {
+    width: 140%;
+    text-align: center;
+  }
+
+  .spin{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    color : #2B91BF;
+    transform: translate(-50%, -50%);
+  }
+
+
+  .header {
+    padding : 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.title {
+    color : black;
+    font-weight: bold;
+    font-size : 25px;
+}
+
+.title1 {
+    color : black;
+    font-weight: bold;
+    font-size : 20px;
+    text-align : center;
+}
+
+.ion-col {
+    width: 100%;
+    text-align: center;
+    font-size : 15px;
+    display: block;
+    height: 100%;
+}
+
+.center-row {
+    margin : 10% auto;
+    display: block;
+}
+.buttons {
+    display : block;
+    margin: 15% auto;
+}
+.intro {
+    text-align: center;
+    font-size : 5vw;
+    color : black;
+    font-weight: bold;
+    display: block;
+}
+
+.avatar {
+    width: 250px;
+    height: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 0 auto;
+    display: block;
+    margin-top: 25px;
+    position: relative;
+}
+
+.slides {
+    height: 100%;
+    width: 100%;
+}
+
+.slide {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    height: 100%;
+    margin: 0 auto;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.intro-slide {
+    display: block;
+}

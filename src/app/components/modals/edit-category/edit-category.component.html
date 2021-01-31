@@ -1,0 +1,76 @@
+<app-header [page]="'Edit Category'" [type]="'modal'"></app-header>
+
+<ion-content>
+  <ion-grid *ngIf="currentCategorie && currentCategorie != null">
+    <ion-row>
+      <ion-col size="12">
+        <ion-chip>
+        <ion-icon name="create-outline"></ion-icon>
+        <ion-toggle [(ngModel)]="toggle" ></ion-toggle>
+      </ion-chip>
+      </ion-col>
+      <ion-col size="12" class="col">
+        
+        <ion-avatar class="img">
+          <img *ngIf="!currentCategorie || currentCategorie.imageUrl == '' " src="../../../assets/imgs/capsules.png">
+          <img *ngIf="currentCategorie && currentCategorie.imageUrl != ''" [src]="currentCategorie.imageUrl">
+          <div class="rounded-input" *ngIf="toggle">
+            <label for="files" class="btn"><ion-icon name="camera-outline"></ion-icon></label>
+            <input id="files" type="file" style="visibility:hidden;" [(ngModel)]="image" (change)="selectedImage($event)" >
+          </div>
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="12" *ngIf="!toggle">
+        <div class="name-holder">
+          <ion-label class="display-name">
+            {{currentCategorie.name | uppercase}}
+          </ion-label>
+        </div>
+        <div class="name-holder">
+          <ion-label class="username">
+            {{currentCategorie.description}}
+          </ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="toggle">
+      <form novalidate  [formGroup]="categoryForm"  class="form" (ngSubmit)="update()" data-aos="fade-up">
+        <ion-item lines="none" class="ion-input" data-aos="fade-up" data-aos-duration="3000">
+          <ion-icon name="person-circle"></ion-icon>
+          <ion-input placeHolder="name" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-label class="label-error" *ngIf="formErrors && formErrors.name">*{{formErrors.name}}</ion-label>
+    
+        <ion-item lines="none" class="ion-input">
+          <ion-icon name="person-circle"></ion-icon>
+          <ion-input placeHolder="description" formControlName="description"></ion-input>
+        </ion-item>
+        <ion-label class="label-error" *ngIf="formErrors && formErrors.description">*{{formErrors.description}}</ion-label>
+        <ion-button class="buttons" [disabled]="categoryForm.invalid || submitted" (click)="update()" shape="round" size="default" expand="full">
+          <ion-label *ngIf="!submitted">UPDATE</ion-label>
+          <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+        </ion-button>
+      </form>
+    </ion-row>
+    <ion-row class="bottom-row">
+      <ion-col size="12" *ngIf="!toggle">
+        <app-products [category]='currentCategorie' [type]="'category'"></app-products>
+      </ion-col>
+      <ion-col size="8" *ngIf="toggle">
+        <ion-button shape="round" size="default" color="success" class="delete-btn" expand="full" (click)="addProduct()" >
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="4" *ngIf="toggle">
+        <ion-button shape="round" size="default" color="danger" class="delete-btn" expand="full" (click)="deleteCategory()">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <div class="spin" *ngIf="!currentCategorie">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+</ion-content>

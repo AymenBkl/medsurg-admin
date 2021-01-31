@@ -1,0 +1,48 @@
+<app-header [page]="'Commission'" [type]="'page'"></app-header>
+
+
+<ion-content>
+  <ion-grid *ngIf="currentUser">
+    <ion-row *ngFor="let commission of commissions" (click)="callUpdateCommission(commission)">
+      <ion-col size="12">
+        <ion-card lines="none" class="card" >
+          <div class="main-container">
+            <div class="container" style="width: 20%;">
+              <img class="avatar-icon" 
+                src="../../../assets/imgs/commission.svg" width="50px" height="50px">
+            </div>
+            <div class="container-info">
+
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  name="link-outline"></ion-icon> : Name : {{commission.name}}
+                </ion-label>
+              </div>
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  name="pricetags-outline"></ion-icon> : Commision {{commission.commission}}
+                </ion-label>
+              </div>
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  name="calendar"></ion-icon> Creation : {{commission.createdAt | date:'short'}}
+                </ion-label>
+              </div>
+              <div class="address">
+                <ion-label class="label">
+                  <ion-icon class="icon"  name="calendar"></ion-icon> Last Updated : {{commission.updatedAt | date:'short'}}
+                </ion-label>
+              </div>
+            </div>
+            <hr>
+            
+          </div>
+      </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <div class="spin" *ngIf="!currentUser && commissions != undefined">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+</ion-content>

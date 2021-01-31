@@ -1,0 +1,44 @@
+
+<app-header [page]="'Add message'" [type]="'modal'"></app-header>
+<ion-content>
+
+<ion-grid>
+  <ion-row *ngIf="currentUser && selectedUser">
+    <ion-col size="12" size-md="8" offset-md="2">
+      <ion-card class="card">
+        <ion-item lines="none" class="profile-holder">
+          <ion-avatar class="img">
+            <img *ngIf="selectedUser.role == 'pharmacy'  && selectedUser.imageUrl == ''" src="../../../../assets/imgs/pharmacy-user-img.png">
+              <img *ngIf="selectedUser.role == 'patient'   && selectedUser.imageUrl == ''" src="../../../../assets/imgs/patient.svg">
+            <img *ngIf="selectedUser && selectedUser.imageUrl != ''" [src]="selectedUser.imageUrl">
+          </ion-avatar>
+          <div class="header">
+          <ion-text class="name">
+            {{selectedUser.firstname}} {{selectedUser.lastname}}
+          </ion-text>
+          <ion-text class="date">
+            
+          </ion-text>
+        </div>
+        </ion-item>
+        <ion-item class="description" lines="none">
+          <ion-textarea class="text" placeHolder="Message" [(ngModel)]="message.message" rows="15">
+
+          </ion-textarea>
+        </ion-item>
+        
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<div class="spin" *ngIf="!currentUser && !selectedUser">
+  <ion-spinner name="bubbles"></ion-spinner>
+</div>
+
+<ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="currentUser">
+  <ion-fab-button (click)="postMessage()" >
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>

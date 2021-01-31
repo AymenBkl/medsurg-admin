@@ -1,0 +1,134 @@
+
+<app-header [page]="'Payment Detail'" [type]="'modal'"></app-header>
+<ion-grid >
+  <ion-row *ngIf="commission">
+    <ion-col size="12">
+      <ion-item class="profile-holder">
+        <div class="header">
+        <ion-text class="name">
+          You apply a commision of {{commission.commission}}%
+        </ion-text>
+      </div>
+      </ion-item>
+      <ion-item class="profile-holder" *ngIf="commission.name == 'Pay Pharmacy' || commission.name == 'Referal'">
+        <div class="header">
+        <ion-text class="name">
+          Paying {{order.totalPrice -  order.totalPrice * (commission.commission)/100}} of {{order.totalPrice}}
+        </ion-text>
+      </div>
+      </ion-item>
+      <ion-item class="profile-holder" *ngIf="commission.name == 'Refund'">
+        <div class="header">
+        <ion-text class="name">
+          Paying {{order.refund.refund.refundPrice -  order.refund.refund.refundPrice * (commission.commission)/100}} of {{order.refund.refund.refundPrice}}
+        </ion-text>
+      </div>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="order && order.patient && order.patient.paymentDetail && commission.name == 'Refund'">
+    <ion-col class="col" size="12">
+      <ion-card lines="none" class="card">
+        <div class="main-container">
+          <div class="container-info">  
+            <div class="address">
+              <ion-label class="label">
+                <ion-icon class="icon"  src="/../../../assets/imgs/bank.svg"></ion-icon> Bank Account Number : {{order.patient.paymentDetail.bankAccountNumber}}
+              </ion-label>
+            </div>
+            <div class="address">
+              <ion-label class="label">
+                <ion-icon class="icon"  src="../../../assets/imgs/bank-normal.svg"></ion-icon> IFSC code : {{order.patient.paymentDetail.IFSCCODE}}
+              </ion-label>
+            </div>
+            <div class="address">
+              <ion-label class="label">
+                <ion-icon class="icon"  src="../../../assets/imgs/credit-card.svg"></ion-icon> Account Holder's Name : {{order.patient.paymentDetail.ACCOUNTHOLDERNAME}}
+              </ion-label>
+            </div>
+          </div>
+          <hr>
+        </div>
+    </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="order && order.patient && order.patient.paymentDetail && commission.name == 'Referal'">
+    <ion-col class="col" size="12">
+      <ion-card lines="none" class="card">
+        <div class="main-container">
+          <div class="container-info">  
+            <div class="address">
+              <ion-label class="label">
+                <ion-icon class="icon"  src="/../../../assets/imgs/bank.svg"></ion-icon> Bank Account Number : {{order.patient.paymentDetail.bankAccountNumber}}
+              </ion-label>
+            </div>
+            <div class="address">
+              <ion-label class="label">
+                <ion-icon class="icon"  src="../../../assets/imgs/bank-normal.svg"></ion-icon> IFSC code : {{order.patient.paymentDetail.IFSCCODE}}
+              </ion-label>
+            </div>
+            <div class="address">
+              <ion-label class="label">
+                <ion-icon class="icon"  src="../../../assets/imgs/credit-card.svg"></ion-icon> Account Holder's Name : {{order.patient.paymentDetail.ACCOUNTHOLDERNAME}}
+              </ion-label>
+            </div>
+          </div>
+          <hr>
+        </div>
+    </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="order && order.pharmacy && order.pharmacy.paymentDetail && commission.name == 'Pay Pharmacy'">
+    <ion-col class="col" size="12">
+      <ion-card lines="none" class="card">
+        <div class="main-container">
+          <div class="container-info">  
+            <div class="address">
+              <ion-label class="label">
+                <ion-icon class="icon"  src="/../../../assets/imgs/bank.svg"></ion-icon> Bank Account Number : {{order.pharmacy.paymentDetail.bankAccountNumber}}
+              </ion-label>
+            </div>
+            <div class="address">
+              <ion-label class="label">
+                <ion-icon class="icon"  src="../../../assets/imgs/bank-normal.svg"></ion-icon> IFSC code : {{order.pharmacy.paymentDetail.IFSCCODE}}
+              </ion-label>
+            </div>
+            <div class="address">
+              <ion-label class="label">
+                <ion-icon class="icon"  src="../../../assets/imgs/credit-card.svg"></ion-icon> Account Holder's Name : {{order.pharmacy.paymentDetail.ACCOUNTHOLDERNAME}}
+              </ion-label>
+            </div>
+          </div>
+          <hr>
+        </div>
+    </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="bottom-row" *ngIf="order && order.patient && order.pharmacy.paymentDetail && commission.name == 'Pay Pharmacy'">
+    <ion-col size="12" >
+      <ion-button shape="round" size="default" color="light"  expand="full" (click)="payPharmacy()" >
+        <ion-text>PAY PHARMACY</ion-text>
+      </ion-button>
+    </ion-col>
+    
+  </ion-row>
+  <ion-row class="bottom-row" *ngIf="order && order.patient && order.patient.paymentDetail && commission.name == 'Refund'">
+    <ion-col size="12" >
+      <ion-button shape="round" size="default" color="light"  expand="full" (click)="payPatient()" >
+        <ion-text>PAY REFUND</ion-text>
+      </ion-button>
+    </ion-col>
+    
+  </ion-row>
+  <ion-row class="bottom-row" *ngIf="order && order.patient && order.patient.paymentDetail && commission.name == 'Referal'">
+    <ion-col size="12" >
+      <ion-button shape="round" size="default" color="light"  expand="full" (click)="payReferal()" >
+        <ion-text>PAY PATIENT</ion-text>
+      </ion-button>
+    </ion-col>
+    
+  </ion-row>
+</ion-grid>
