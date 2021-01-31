@@ -2,21 +2,14 @@ import { FormGroup } from '@angular/forms';
 
 // tslint:disable-next-line: prefer-const
 let formErrors = {
-    username: '',
     firstname: '',
     lastname: '',
-    email: '',
     password: '',
     confirmPassword: ''
 };
 
 // tslint:disable-next-line: prefer-const
 let validationMessages = {
-    username: {
-        required: 'Username is required.',
-        minlength: 'Username must be at least 4 characters long.',
-        maxlength : 'Username must be at most 20 characters long.'
-    },
     firstname: {
         required: 'Firstname is required.',
         minlength: 'Firstname must be at least 4 characters long.',
@@ -26,10 +19,6 @@ let validationMessages = {
         required: 'Lastname is required.',
         minlength: 'Lastname must be at least 4 characters long.',
         maxlength : 'Lastname must be at most 20 characters long.'
-    },
-    email: {
-        required: 'Email is required.',
-        email : 'Please enter a valid format'
     },
     password : {
         required: 'Password is required.',

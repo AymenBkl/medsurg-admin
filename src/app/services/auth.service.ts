@@ -5,7 +5,7 @@ import { User } from '../interfaces/user';
 import { config } from './config';
 import { StorageService } from './storage.service';
 import { ProccessHttpErrosService } from './proccess-http-erros.service';
-import { AuthResponse} from '../interfaces/response';
+import { AuthResponse } from '../interfaces/response';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -21,33 +21,40 @@ export class AuthService {
   authenticated: Subject<boolean> = new Subject<false>();
   isAuthenticated = false;
   constructor(private httpClient: HttpClient,
-              private storageService: StorageService,
-              private httpErrorHandler: ProccessHttpErrosService) {
-               }
+    private storageService: StorageService,
+    private httpErrorHandler: ProccessHttpErrosService) {
+  }
 
   checkJWT() {
-    const token = this.storageService.getToken();
-    if (token){
-      console.log(token);
-      this.httpClient.get<AuthResponse>(this.authURL + 'jwt')
-      .subscribe(response => {
-        console.log(response);
-        if (response.token === 'TOKEN VALID' && response.status === 200){
-          response.user.token = token;
-          this.setUserCredentials(response.user);
-        }
-        else {
-          this.destroyUserCredentials();
-        }
-      }, err => {
-        console.log(err);
+    return new Promise((resolve, reject) => {
+      const token = this.storageService.getToken();
+      if (token) {
+        console.log(token);
+        this.httpClient.get<AuthResponse>(this.authURL + 'jwt')
+          .subscribe(response => {
+            console.log(response);
+            if (response.token === 'TOKEN VALID' && response.status === 200) {
+              response.user.token = token;
+              this.setUserCredentials(response.user);
+              resolve(true);
+            }
+            else {
+              this.destroyUserCredentials();
+              resolve(false);
+            }
+          }, err => {
+            console.log(err);
+            reject(err);
+            this.destroyUserCredentials();
+          });
+      }
+      else {
+        resolve(false);
         this.destroyUserCredentials();
-      });
-    }
-  else {
-    this.destroyUserCredentials();
+      }
+    })
+
   }
-}
 
   signUp(user: User) {
     return new Promise((resolve, reject) => {
@@ -73,10 +80,10 @@ export class AuthService {
   logIn(user: any) {
     return new Promise((resolve, reject) => {
       this.destroyUserCredentials();
-      this.httpClient.post<AuthResponse>(this.authURL + 'login', {username : user.username , password : user.password})
+      this.httpClient.post<AuthResponse>(this.authURL + 'login', { phoneNumber: user.phoneNumber, password: user.password })
         .subscribe(response => {
-          if (response.status === 200){
-            if (user.remember === false){
+          if (response.status === 200) {
+            if (user.remember === false) {
               this.setUserCredentials(response.user);
             }
             else {
@@ -96,10 +103,10 @@ export class AuthService {
     });
   }
 
-  logOut(){
+  logOut() {
     return new Promise((resolve, reject) => {
-        this.destroyUserCredentials();
-        resolve(true);
+      this.destroyUserCredentials();
+      resolve(true);
     });
   }
 
@@ -111,7 +118,7 @@ export class AuthService {
     this.storageService.removeUser();
   }
 
-  setUserCredentials(user){
+  setUserCredentials(user) {
     this.isAuthenticated = user.role === 'admin';
     this.user = user;
     this.currentUser.next(user);
