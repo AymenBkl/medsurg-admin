@@ -56,23 +56,34 @@ export class ReferalpagePage implements OnInit {
     this.getReferal();
   }
 
-  countTotalPrice(referal: Referal) {
-    let totalPrice:{PAID: number,NPAID:number} = {PAID:0,NPAID:0};
-    if (referal){
-      referal.orders.map(order => {
-        if (order.status == 'delivered'){
-          if (order.referal.payedByAdmin == 'PAID'){
-            totalPrice.PAID += order.totalPrice - (order.totalPrice*order.referal.commissionApplied)/100;
+    countTotalPrice(referal: Referal) {
+      let totalPrice:{PAID: number,NPAID:number} = {PAID:0,NPAID:0};
+      if (referal){
+        referal.orders.map(order => {
+          if (order.status == 'delivered'){
+            if (order.referal.payedByAdmin == 'PAID'){
+              if (order.refund.refund){
+                totalPrice.PAID += (order.totalPrice - order.refund.refund.refundPrice ) - ((order.totalPrice - order.refund.refund.refundPrice )*order.referal.commissionApplied)/100;
+              }
+              else {
+                totalPrice.PAID += order.totalPrice - (order.totalPrice*order.referal.commissionApplied)/100;
+              }
+            }
+            else {
+              if (order.refund.refund != null){
+                totalPrice.NPAID += (order.totalPrice - order.refund.refund.refundPrice ) - ((order.totalPrice - order.refund.refund.refundPrice )*this.comission.commission)/100;
+              }
+              else {
+                totalPrice.NPAID += order.totalPrice - (order.totalPrice*this.comission.commission)/100;
+              }
+            }
+            
           }
-          else {
-            totalPrice.NPAID += order.totalPrice - (order.totalPrice*this.comission.commission)/100;
-          }
-          
-        }
-      })
+        })
+      }
+      return totalPrice
     }
-    return totalPrice;
-  }
+  
 
   referalDetail(referal: Referal){
     this.referalModalController.callReferal(this.currentUser,referal,this.comission);
