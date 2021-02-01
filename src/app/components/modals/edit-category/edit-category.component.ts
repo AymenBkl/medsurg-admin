@@ -93,6 +93,7 @@ export class EditCategoryComponent implements OnInit {
             }
       }   );
       }).catch(err => {
+        this.interactionService.hide();
         this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
       });
   }

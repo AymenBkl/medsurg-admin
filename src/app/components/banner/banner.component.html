@@ -1,11 +1,11 @@
 <ion-slides pager="true" [options]="slideOpts">
 
   <ion-slide  class="animate-item">
-    <ion-card class="card">
+    <ion-card class="card" (click)="goTo('referal')">
       <ion-text>
-        Corporates Doctors gives you more access to medecins
+        Referals will grow your community
       </ion-text>
-        <img src="../../../assets/imgs/doctor.png">
+        <img src="../../../assets/imgs/marketing.svg">
     </ion-card>
   </ion-slide>
   <ion-slide  class="animate-item">
@@ -17,7 +17,7 @@
     </ion-card>
   </ion-slide>
   <ion-slide  class="animate-item">
-    <ion-card class="card" id="card-categorie" (click)="goTo('addproduct')">
+    <ion-card class="card" id="card-categorie" (click)="goTo('mainproducts')">
       <ion-text>
         Medecins is all what patients looking for ?
       </ion-text>
@@ -25,11 +25,20 @@
     </ion-card>
   </ion-slide>
   <ion-slide  class="animate-item">
-    <ion-card class="card" id="card-post">
+    <ion-card class="card" id="card-post" (click)="goTo('prescriptions')">
       <ion-text>
         See Patietns Prescriptions
       </ion-text>
         <img src="../../../assets/imgs/medical-prescription.png">
+    </ion-card>
+  </ion-slide>
+
+  <ion-slide  class="animate-item">
+    <ion-card class="card" id="card-categorie" (click)="goTo('orders')">
+      <ion-text>
+        See Orders
+      </ion-text>
+        <img src="../../../assets/imgs/shopping-cart.svg">
     </ion-card>
   </ion-slide>
 
