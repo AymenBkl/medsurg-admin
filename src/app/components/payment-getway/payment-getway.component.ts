@@ -58,7 +58,7 @@ payReferal(){
     })
 }
 payPatient(){
-  this.orderService.payRefund(this.order._id,this.commission.commission,this.order.referal.referal._id)
+  this.orderService.payRefund(this.order._id,this.commission.commission,this.order.refund.refund._id)
     .then((result) => {
       if (result && result != false){
         this.interactionService.createToast('Your Order Has been Updated !', 'success', 'bottom');

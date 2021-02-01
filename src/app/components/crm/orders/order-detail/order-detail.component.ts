@@ -76,9 +76,9 @@ export class OrderDetailComponent implements OnInit {
   }
 
   checkOrderDate(){
-    const orderDate = (new Date(this.order.createdAt).getTime() / 1000) + 7*24*36000 ;
+    const orderDate = (new Date(this.order.createdAt).getTime() / 1000) + 60 ;
     const finish = (new Date().getTime() / 1000) ;
-    this.isValidRefund = orderDate > finish ;
+    this.isValidRefund = orderDate < finish ;
   }
 
   callPaymentGetway(i){

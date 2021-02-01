@@ -133,7 +133,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="12"> 
-        <ion-button shape="round" size="default" color="light" *ngIf="order.refund && order.refund.refund && order.refund.payedByAdmin != 'PAID'  && isValidRefund && order.status === 'delivered'" expand="full" (click)="callPaymentGetway(1)">
+        <ion-button shape="round" size="default" color="light" *ngIf="order.refund && order.refund.refund && order.refund.payedByAdmin == 'PICKUP'  && isValidRefund && order.status === 'delivered'" expand="full" (click)="callPaymentGetway(1)">
           <ion-text>Pay Refund</ion-text>
         </ion-button>
       </ion-col>

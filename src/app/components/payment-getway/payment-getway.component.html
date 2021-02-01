@@ -53,24 +53,24 @@
     </ion-col>
   </ion-row>
 
-  <ion-row *ngIf="order && order.patient && order.patient.paymentDetail && commission.name == 'Referal'">
+  <ion-row *ngIf="order && order.referal.referal && order.referal.referal.owner && order.referal.referal.owner.paymentDetail && commission.name == 'Referal'">
     <ion-col class="col" size="12">
       <ion-card lines="none" class="card">
         <div class="main-container">
           <div class="container-info">  
             <div class="address">
               <ion-label class="label">
-                <ion-icon class="icon"  src="/../../../assets/imgs/bank.svg"></ion-icon> Bank Account Number : {{order.patient.paymentDetail.bankAccountNumber}}
+                <ion-icon class="icon"  src="/../../../assets/imgs/bank.svg"></ion-icon> Bank Account Number : {{order.referal.referal.owner.paymentDetail.bankAccountNumber}}
               </ion-label>
             </div>
             <div class="address">
               <ion-label class="label">
-                <ion-icon class="icon"  src="../../../assets/imgs/bank-normal.svg"></ion-icon> IFSC code : {{order.patient.paymentDetail.IFSCCODE}}
+                <ion-icon class="icon"  src="../../../assets/imgs/bank-normal.svg"></ion-icon> IFSC code : {{order.referal.referal.owner.paymentDetail.IFSCCODE}}
               </ion-label>
             </div>
             <div class="address">
               <ion-label class="label">
-                <ion-icon class="icon"  src="../../../assets/imgs/credit-card.svg"></ion-icon> Account Holder's Name : {{order.patient.paymentDetail.ACCOUNTHOLDERNAME}}
+                <ion-icon class="icon"  src="../../../assets/imgs/credit-card.svg"></ion-icon> Account Holder's Name : {{order.referal.referal.owner.paymentDetail.ACCOUNTHOLDERNAME}}
               </ion-label>
             </div>
           </div>
@@ -115,7 +115,7 @@
     </ion-col>
     
   </ion-row>
-  <ion-row class="bottom-row" *ngIf="order && order.patient && order.patient.paymentDetail && commission.name == 'Refund'">
+  <ion-row class="bottom-row" *ngIf="order && order.refund.refund && order.patient && order.patient.paymentDetail && commission.name == 'Refund'">
     <ion-col size="12" >
       <ion-button shape="round" size="default" color="light"  expand="full" (click)="payPatient()" >
         <ion-text>PAY REFUND</ion-text>
@@ -123,7 +123,7 @@
     </ion-col>
     
   </ion-row>
-  <ion-row class="bottom-row" *ngIf="order && order.patient && order.patient.paymentDetail && commission.name == 'Referal'">
+  <ion-row class="bottom-row" *ngIf="order && order.referal.referal && order.referal.referal.owner && order.referal.referal.owner.paymentDetail && commission.name == 'Referal'">
     <ion-col size="12" >
       <ion-button shape="round" size="default" color="light"  expand="full" (click)="payReferal()" >
         <ion-text>PAY PATIENT</ion-text>
