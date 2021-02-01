@@ -20,7 +20,7 @@
       <ion-label>PAID</ion-label>
     </ion-segment-button>
   </ion-segment>
-    <ion-list class="list-orders" *ngIf="refunds[currentSegmentType] > 0"> 
+    <ion-list class="list-orders" > 
         <ion-item lines="none" class="item-order"  *ngFor="let refund of refunds[currentSegmentType];let i = index" (click)="goToRefundDetail(refund)" [ngClass]="'item-order-' + refund.order.status ">
           <div class="main-container">
           <div class="container" style="width: 20%;">
