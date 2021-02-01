@@ -43,7 +43,7 @@ export class RefundPage implements OnInit {
             this.interactionService.hide();
             if (result && result != false) {
               console.log(result);
-              this.filterRefunds(result)
+              this.filterRefunds(result);
               if (result.length != 0) {
                 this.interactionService.createToast('Your Refunds has been loaded !', 'success', 'bottom');
               }

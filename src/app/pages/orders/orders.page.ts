@@ -110,10 +110,17 @@ export class OrdersPage implements OnInit {
 
   filterOrders(orders: Order[]) {
     orders.map(async (order) => {
-      order.method == 'card' ? await this.checkPaymentStatus(order) : '';
-      this.allOrder[order.payedByAdmin].ALL.all.push(order);
-      this.allOrder[order.payedByAdmin].ALL[order.status].push(order);
-      console.log(this.allOrder)
+      if (order.method == 'cod') {
+        this.allOrder.PAID.ALL.all.push(order);
+        this.allOrder.PAID.SUCCESS[order.status].push(order);
+        this.allOrder.PAID.SUCCESS.all.push(order);
+
+      }
+      else {
+        await this.checkPaymentStatus(order);
+        this.allOrder[order.payedByAdmin].ALL.all.push(order);
+        this.allOrder[order.payedByAdmin].ALL[order.status].push(order);
+      }
     });
   }
 
