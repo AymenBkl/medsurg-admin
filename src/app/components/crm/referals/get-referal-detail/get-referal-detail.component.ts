@@ -94,9 +94,19 @@ export class GetReferalDetailComponent implements OnInit {
       referal.orders.map(order => {
         if (order.status == 'delivered'){
           if (order.referal.payedByAdmin == 'PAID'){
-            this.totalPrice.PAID += order.totalPrice - (order.totalPrice*order.referal.commissionApplied)/100;
+            if (order.refund.refund){
+              order.totalPrice -= order.refund.refund.refundPrice;
+              this.totalPrice.PAID += order.totalPrice - (order.totalPrice*order.referal.commissionApplied)/100;
+            }
+            else {
+              this.totalPrice.PAID += order.totalPrice - (order.totalPrice*order.referal.commissionApplied)/100;
+            }
           }
           else {
+            console.log(referal);
+            if (order.refund.refund != null){
+              order.totalPrice -= order.refund.refund.refundPrice;
+            }
             this.totalPrice.NPAID += order.totalPrice - (order.totalPrice*this.commission.commission)/100;
           }
           
@@ -106,12 +116,18 @@ export class GetReferalDetailComponent implements OnInit {
   }
 
   filterOrders(orders: Order[]) {
-    console.log(orders);
     orders.map(async (order) => {
-      order.method == 'card' ? await this.checkPaymentStatus(order) : '';
-      this.allOrder[order.payedByAdmin].ALL.all.push(order);
-      this.allOrder[order.payedByAdmin].ALL[order.status].push(order);
-      console.log(this.allOrder)
+      if (order.method == 'cod') {
+        this.allOrder.PAID.ALL.all.push(order);
+        this.allOrder.PAID.SUCCESS[order.status].push(order);
+        this.allOrder.PAID.SUCCESS.all.push(order);
+
+      }
+      else {
+        await this.checkPaymentStatus(order);
+        this.allOrder[order.payedByAdmin].ALL.all.push(order);
+        this.allOrder[order.payedByAdmin].ALL[order.status].push(order);
+      }
     });
   }
 
