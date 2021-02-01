@@ -56,7 +56,7 @@ import { PaymentGetwayComponent } from '../payment-getway/payment-getway.compone
     GetAllMessagesComponent,
     OrderDetailComponent,
     GetReferalDetailComponent,
-    AddProductToCategoryComponent,
+    AddProductToCategoryComponent, 
     RefundDetailComponent,
     ComissionDetailComponent,
     PaymentGetwayComponent
