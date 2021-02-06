@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController, NavParams } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonSlides, ModalController, NavController, NavParams } from '@ionic/angular';
 import { Prescription } from 'src/app/interfaces/prescriptions';
 import { User } from 'src/app/interfaces/user';
 import { InteractionService } from '../../../services/interaction.service';
@@ -19,6 +19,13 @@ export class PrescriptionComponent implements OnInit {
   prescription: Prescription;
   commentToAdd: Comment;
   modalControllers: ModalControllers;
+  images: { url: any }[] = [];
+  @ViewChild('slides') slides: IonSlides;
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    onlyExternal: false
+  };
   constructor(private navParam: NavParams,
               private interactionService: InteractionService,
               private modalCntrl: ModalController) {
@@ -27,12 +34,29 @@ export class PrescriptionComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
+    this.initImages();
   }
 
   getData(){
     this.currentUser = this.navParam.get('user');
     this.prescription = this.navParam.get('prescription');
     this.sortComments();
+  }
+
+  ngAfterViewInit() {
+    setTimeout(
+      () => {
+        if (this.slides) {
+          this.slides.update();
+        }
+      }, 300
+    );
+  }
+
+  initImages() {
+    this.prescription.imageUrl.map((imageURL, i) => {
+      this.images.push({ url: imageURL });
+    })
   }
 
 

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../../services/auth.service';
 import { ModalControllers } from '../../classes/modalControllers';
-import { ModalController } from '@ionic/angular';
+import { IonSlides, ModalController } from '@ionic/angular';
 import { Prescription } from 'src/app/interfaces/prescriptions';
 import { InteractionService } from '../../services/interaction.service';
 import { map } from 'rxjs/operators';
@@ -23,7 +23,13 @@ export class PrescriptionsPage implements OnInit {
   commentToAdd: Comment;
   offers: Offer[] | any;
   currentSegmentType: string = 'prescriptions';
+  @ViewChild('slides') slides: IonSlides;
 
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    onlyExternal: false
+  };
   constructor(private authService: AuthService,
               private modalController: ModalController,
               private prescriptionService: PrescriptionService,
@@ -32,6 +38,16 @@ export class PrescriptionsPage implements OnInit {
               }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    setTimeout(
+      () => {
+        if (this.slides) {
+          this.slides.update();
+        }
+      }, 300
+    );
   }
 
   ionViewDidEnter(){

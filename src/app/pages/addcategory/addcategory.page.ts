@@ -40,6 +40,16 @@ export class AddcategoryPage implements OnInit {
     this.buildReactiveForm();
 }
 
+ngAfterViewInit() {
+  setTimeout(
+    () => {
+      if (this.slides) {
+        this.slides.update();
+      }
+    }, 300
+  );
+}
+
 buildReactiveForm() {
   this.categoryForm = this.formBuilder.group({
     name : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],

@@ -25,12 +25,13 @@
             {{prescription.description}}
           </ion-text>
         </ion-item>
-        <ion-item lines="none" class="prescription-holder">
-            <label for="file-input">
-              <img *ngIf="prescription && prescription.imageUrl != ''" [src]="prescription.imageUrl"  />
-              <img *ngIf="!prescription || prescription.imageUrl == ''" src="../../../../assets/imgs/medical-prescription.png"  />
-            </label>
-        </ion-item>
+        <ion-slides [options]='slideOpts' #slides pager >
+          <ion-slide  *ngFor="let image of images">
+            <ion-item line="none" class="prescription-holder">
+              <img [src]="image.url">
+            </ion-item>
+          </ion-slide>
+        </ion-slides>
         <ion-item lines="none" class="comment-holder">
           <div class="comment-holder">
             <h1>Comments</h1>
@@ -43,7 +44,7 @@
               <img *ngIf="comment && comment.pharmacy.imageUrl != ''" [src]="comment.pharmacy.imageUrl">
             </ion-avatar>
             <ion-text type="number"  class="add-comment">
-              {{calculateCommentPrice(comment)}}
+              ₹{{calculateCommentPrice(comment)}}
             </ion-text>
           </div>
         </ion-item>
