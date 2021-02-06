@@ -13,14 +13,14 @@
       <ion-item class="profile-holder" *ngIf="commission.name == 'Pay Pharmacy' || commission.name == 'Referal'">
         <div class="header">
         <ion-text class="name">
-          Paying {{order.totalPrice -  order.totalPrice * (commission.commission)/100}} of {{order.totalPrice}}
+          Paying ₹{{order.totalPrice -  order.totalPrice * (commission.commission)/100}} of {{order.totalPrice}}
         </ion-text>
       </div>
       </ion-item>
       <ion-item class="profile-holder" *ngIf="commission.name == 'Refund'">
         <div class="header">
         <ion-text class="name">
-          Paying {{order.refund.refund.refundPrice -  order.refund.refund.refundPrice * (commission.commission)/100}} of {{order.refund.refund.refundPrice}}
+          Paying ₹{{order.refund.refund.refundPrice -  order.refund.refund.refundPrice * (commission.commission)/100}} of {{order.refund.refund.refundPrice}}
         </ion-text>
       </div>
       </ion-item>

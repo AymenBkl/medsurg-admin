@@ -75,7 +75,7 @@
       <ion-col size="12">
         <ion-title class="title-patient">Total Price</ion-title>
         <div  class="total-price-holder">
-          <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{'PAID:' + totalPrice.PAID + ' , UNPAID:' + totalPrice.NPAID}}
+          <ion-icon class="ion-icon" name="cash-outline"></ion-icon> : {{'₹ PAID:' + totalPrice.PAID + ' , ₹ UNPAID:' + totalPrice.NPAID}}
         </div>
       </ion-col>
     </ion-row>
@@ -110,7 +110,7 @@
                   {{order.address.postalCode}}
                 </ion-label>  
     
-                <ion-label class="inner-item"><ion-icon class="ion-icon" name="cash-outline"></ion-icon> : €{{order.totalPrice}}</ion-label>
+                <ion-label class="inner-item"><ion-icon class="ion-icon" name="cash-outline"></ion-icon> : ₹{{order.totalPrice}}</ion-label>
               </div>
     
               <div class="inner-container" >
