@@ -18,8 +18,8 @@
         <ion-card class="card" *ngFor="let message of messagesTotalReceived[currentSegmentUser]">
           <ion-item lines="none" class="profile-holder">
             <ion-avatar class="img">
-              <img *ngIf="message.from.role == 'pharmacy'  && message.from.imageUrl == ''" src="../../../../assets/imgs/pharmacy-user-img.png">
-              <img *ngIf="message.from.role == 'patient'   && message.from.imageUrl == ''" src="../../../../assets/imgs/patient.svg">
+              <img *ngIf="message.from.role == 'pharmacy'  && message.from.imageUrl == ''" src="..//assets/imgs/pharmacy-user-img.png">
+              <img *ngIf="message.from.role == 'patient'   && message.from.imageUrl == ''" src="..//assets/imgs/patient.svg">
               <img *ngIf="message && message.from.imageUrl != ''" [src]="message.from.imageUrl">
             </ion-avatar>
             <div class="header">
@@ -47,8 +47,8 @@
         <ion-card class="card" *ngFor="let message of messagesTotalSent[currentSegmentUser]">
           <ion-item lines="none" class="profile-holder">
             <ion-avatar class="img">
-              <img *ngIf="message.to.role == 'pharmacy'  && message.to.imageUrl == ''" src="../../../../assets/imgs/pharmacy-user-img.png">
-              <img *ngIf="message.to.role == 'patient'   && message.to.imageUrl == ''" src="../../../../assets/imgs/patient.svg">
+              <img *ngIf="message.to.role == 'pharmacy'  && message.to.imageUrl == ''" src="..//assets/imgs/pharmacy-user-img.png">
+              <img *ngIf="message.to.role == 'patient'   && message.to.imageUrl == ''" src="..//assets/imgs/patient.svg">
               <img *ngIf="message && message.to.imageUrl != ''" [src]="message.to.imageUrl">
             </ion-avatar>
             <div class="header">

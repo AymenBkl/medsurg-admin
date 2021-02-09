@@ -12,13 +12,13 @@
     <ion-slide class="slide">
       <form novalidate  [formGroup]="categoryForm"  class="form" (ngSubmit)="addCategory()" data-aos="fade-up">
         <ion-item lines="none" class="ion-input" data-aos="fade-up" data-aos-duration="3000">
-          <ion-icon src="../../../assets/imgs/capsules.svg"></ion-icon>
+          <ion-icon src="/assets/imgs/capsules.svg"></ion-icon>
           <ion-input placeHolder="Category Name" formControlName="name"></ion-input>
         </ion-item>
         <ion-label class="label-error" *ngIf="formErrors && formErrors.name">*{{formErrors.name}}</ion-label>
     
         <ion-item lines="none" class="ion-input">
-          <ion-icon src="../../../assets/imgs/capsules.svg"></ion-icon>
+          <ion-icon src="/assets/imgs/capsules.svg"></ion-icon>
           <ion-input placeHolder="Category Description" formControlName="description"></ion-input>
         </ion-item>
         <ion-label class="label-error" *ngIf="formErrors && formErrors.description">*{{formErrors.description}}</ion-label>
@@ -31,7 +31,7 @@
     <ion-slide class="slide intro-slide">
      <ion-label class="intro ">Choose an image</ion-label>
      <ion-avatar class="avatar">
-      <img *ngIf="!currentCategory || currentCategory.imageUrl == '' " src="../../../assets/imgs/medicine.png">
+      <img *ngIf="!currentCategory || currentCategory.imageUrl == '' " src="/assets/imgs/medicine.png">
       <img *ngIf="currentCategory && currentCategory.imageUrl != ''" [src]="currentCategory.imageUrl">
        <div class="rounded-input" >
         <label for="files" class="btn"><ion-icon name="camera-outline"></ion-icon></label>
@@ -49,7 +49,7 @@
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed" *ngIf="currentSlide == 2 && currentCategory != null">
     <ion-fab-button (click)="finish()" >
-      <ion-icon src="../../../assets/imgs/thumbs-up.svg"></ion-icon>
+      <ion-icon src="/assets/imgs/thumbs-up.svg"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   

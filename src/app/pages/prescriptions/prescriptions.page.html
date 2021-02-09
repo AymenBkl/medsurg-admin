@@ -18,7 +18,7 @@
           <div (click)="callPrescriptionPage(prescription)">
           <ion-item liness="none" class="profile-holder">
             <ion-avatar class="img">
-              <img *ngIf="!prescription || prescription.patient.imageUrl == ''" src="../../../assets/imgs/patient.svg">
+              <img *ngIf="!prescription || prescription.patient.imageUrl == ''" src="/assets/imgs/patient.svg">
               <img *ngIf="prescription && prescription.patient.imageUrl != ''" [src]="prescription.patient.imageUrl">
             </ion-avatar>
             <div class="header">
@@ -49,7 +49,7 @@
           <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments" [class.highlited]='comment.status == "accepted"'>
             <div class="comment-holder">
               <ion-avatar class="img">
-                <img *ngIf="!comment || comment.pharmacy.imageUrl == '' " src="../../../assets/imgs/pharmacy-user-img.png">
+                <img *ngIf="!comment || comment.pharmacy.imageUrl == '' " src="/assets/imgs/pharmacy-user-img.png">
                 <img *ngIf="comment && comment.pharmacy.imageUrl != ''" [src]="comment.pharmacy.imageUrl">
               </ion-avatar>
               <ion-text class="text"  class="add-comment">
@@ -71,7 +71,7 @@
           <div (click)="callPrescriptionPage(prescription)">
           <ion-item liness="none" class="profile-holder">
             <ion-avatar class="img">
-              <img *ngIf="!prescription || prescription.patient.imageUrl == ''" src="../../../assets/imgs/patient.svg">
+              <img *ngIf="!prescription || prescription.patient.imageUrl == ''" src="/assets/imgs/patient.svg">
               <img *ngIf="prescription && prescription.patient.imageUrl != ''" [src]="prescription.patient.imageUrl">
             </ion-avatar>
             <div class="header">
@@ -103,7 +103,7 @@
           <ion-item lines="none" class="comment-holder" *ngFor="let comment of prescription.comments" [class.highlited]='comment.status == "approved"'>
             <div class="comment-holder">
               <ion-avatar class="img">
-                <img *ngIf="!comment || comment.pharmacy.imageUrl == '' " src="../../../assets/imgs/pharmacy-user-img.png">
+                <img *ngIf="!comment || comment.pharmacy.imageUrl == '' " src="/assets/imgs/pharmacy-user-img.png">
                 <img *ngIf="comment && comment.pharmacy.imageUrl != ''" [src]="comment.pharmacy.imageUrl">
               </ion-avatar>
               <ion-text class="text"  class="add-comment">

@@ -8,8 +8,8 @@
       <ion-card class="card">
         <ion-item lines="none" class="profile-holder">
           <ion-avatar class="img">
-            <img *ngIf="selectedUser.role == 'pharmacy'  && selectedUser.imageUrl == ''" src="../../../../assets/imgs/pharmacy-user-img.png">
-              <img *ngIf="selectedUser.role == 'patient'   && selectedUser.imageUrl == ''" src="../../../../assets/imgs/patient.svg">
+            <img *ngIf="selectedUser.role == 'pharmacy'  && selectedUser.imageUrl == ''" src="..//assets/imgs/pharmacy-user-img.png">
+              <img *ngIf="selectedUser.role == 'patient'   && selectedUser.imageUrl == ''" src="..//assets/imgs/patient.svg">
             <img *ngIf="selectedUser && selectedUser.imageUrl != ''" [src]="selectedUser.imageUrl">
           </ion-avatar>
           <div class="header">

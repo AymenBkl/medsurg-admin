@@ -7,7 +7,7 @@
         <ion-title class="title-patient">Pharmacy Details</ion-title>
         <ion-item class="profile-holder">
           <ion-avatar class="img">
-            <img *ngIf="!order.pharmacy || order.pharmacy.imageUrl == ''" src="../../../../../assets/imgs/pharmacy-user-img.png">
+            <img *ngIf="!order.pharmacy || order.pharmacy.imageUrl == ''" src="../..//assets/imgs/pharmacy-user-img.png">
             <img *ngIf="order.pharmacy && order.pharmacy.imageUrl != ''" [src]="order.pharmacy.imageUrl">
           </ion-avatar>
           <div class="header">
@@ -43,7 +43,7 @@
       <ion-col size="12" *ngFor="let product of order.products">
       <div  class="product-holder" *ngIf="product.refundedQuantity > 0">
         <ion-avatar class="product-img" *ngIf="product.refundedQuantity > 0">
-          <img *ngIf="!product.product.imageUrl || product.product.imageUrl == ''" src="../../../assets/imgs/capsules.svg">
+          <img *ngIf="!product.product.imageUrl || product.product.imageUrl == ''" src="/assets/imgs/capsules.svg">
           <img *ngIf="product.product.imageUrl && product.product.imageUrl != ''" [src]="product.product.imageUrl">
         </ion-avatar>
         <div class="holder" >

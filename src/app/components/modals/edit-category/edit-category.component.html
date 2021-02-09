@@ -12,7 +12,7 @@
       <ion-col size="12" class="col">
         
         <ion-avatar class="img">
-          <img *ngIf="!currentCategorie || currentCategorie.imageUrl == '' " src="../../../assets/imgs/capsules.png">
+          <img *ngIf="!currentCategorie || currentCategorie.imageUrl == '' " src="/assets/imgs/capsules.png">
           <img *ngIf="currentCategorie && currentCategorie.imageUrl != ''" [src]="currentCategorie.imageUrl">
           <div class="rounded-input" *ngIf="toggle">
             <label for="files" class="btn"><ion-icon name="camera-outline"></ion-icon></label>

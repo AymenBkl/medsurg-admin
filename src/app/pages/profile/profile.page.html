@@ -13,7 +13,7 @@
       <ion-col size="12" class="col">
         
         <ion-avatar class="img">
-          <img *ngIf="!currentUser || currentUser.imageUrl == '' " src="../../../assets/imgs/pharmacy-user-img.png">
+          <img *ngIf="!currentUser || currentUser.imageUrl == '' " src="/assets/imgs/pharmacy-user-img.png">
           <img *ngIf="currentUser && currentUser.imageUrl != ''" [src]="currentUser.imageUrl">
           <div class="rounded-input" *ngIf="toggle">
             <label for="files" class="btn"><ion-icon name="camera-outline"></ion-icon></label>
@@ -62,7 +62,7 @@
       <ion-col size="6" class="card-holder">
         <ion-card class="card">
           <ion-avatar class="img-icon">
-            <img src="../../../assets/imgs/pills.svg">
+            <img src="/assets/imgs/pills.svg">
           </ion-avatar>
           <div class="name-holder">
             <ion-text class="card-title">Your Product</ion-text>
@@ -75,7 +75,7 @@
       <ion-col size="6" class="card-holder">
         <ion-card class="card second">
           <ion-avatar class="img-icon">
-            <img src="../../../assets/imgs/patient.svg">
+            <img src="/assets/imgs/patient.svg">
           </ion-avatar>
           <div class="name-holder">
             <ion-text class="card-title">Patients</ion-text>
