@@ -83,13 +83,8 @@ export class AuthService {
       this.httpClient.post<AuthResponse>(this.authURL + 'login', { phoneNumber: user.phoneNumber, password: user.password })
         .subscribe(response => {
           if (response.status === 200) {
-            if (user.remember === false) {
+            response.user.token = response.token;
               this.setUserCredentials(response.user);
-            }
-            else {
-              response.user.token = response.token;
-              this.setUserCredentials(response.user);
-            }
             resolve(response.user);
           }
           else {
