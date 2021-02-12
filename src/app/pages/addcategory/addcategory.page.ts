@@ -109,6 +109,8 @@ finish() {
   }
 
   selectedImage(event) {
+    if (this.isFileImage(event.target.files[0])){
+
     this.intercationService.createLoading('Updating Your image !!')
       .then(() => {
         const formData = new FormData();
@@ -129,6 +131,16 @@ finish() {
         this.intercationService.hide();
         this.intercationService.createToast('Something Went Wrong !', 'danger', 'bottom');
       });
+    }
+    else {
+      this.intercationService.createToast('You must select an image !', 'danger', 'bottom');
+    }
+  }
+
+  isFileImage(file) {
+    const acceptedImageTypes = ['image/jpeg', 'image/png'];
+  
+    return file && acceptedImageTypes.includes(file['type'])
   }
 
   navigateBack() {

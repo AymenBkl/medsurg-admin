@@ -76,6 +76,8 @@ export class EditCategoryComponent implements OnInit {
   }
 
   selectedImage(event) {
+    if (this.isFileImage(event.target.files[0])){
+
     this.interactionService.createLoading('Updating Your image !!')
       .then(() => {
         const formData = new FormData();
@@ -96,6 +98,16 @@ export class EditCategoryComponent implements OnInit {
         this.interactionService.hide();
         this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
       });
+    }
+    else {
+      this.interactionService.createToast('You must select an image !', 'danger', 'bottom');
+    }
+  }
+
+  isFileImage(file) {
+    const acceptedImageTypes = ['image/jpeg', 'image/png'];
+  
+    return file && acceptedImageTypes.includes(file['type'])
   }
 
   deleteCategory() {

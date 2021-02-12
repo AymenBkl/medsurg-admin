@@ -134,12 +134,14 @@ openFile(){
 }
 
 selectedFile(event) {
+
   this.interactionService.createLoading('Uploading Your Excel File !!')
     .then(() => {
       const formData = new FormData();
-      console.log(event.target.files[0]);
+      console.log(this.isFileImage(event.target.files[0]));
       formData.append('file', event.target.files[0]);
-      this.allProductService.postFile(formData)
+
+      /**this.allProductService.postFile(formData)
         .then((result: any) => {
           this.interactionService.hide();
           if (result && result !== false){
@@ -151,9 +153,16 @@ selectedFile(event) {
             this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
           }
     }   );
+    **/
     }).catch(err => {
       this.interactionService.hide();
       this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
     });
+}
+
+isFileImage(file) {
+  const acceptedImageTypes = ['image/jpeg', 'image/png'];
+
+  return file && acceptedImageTypes.includes(file['type'])
 }
 }
