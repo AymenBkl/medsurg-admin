@@ -134,14 +134,15 @@ openFile(){
 }
 
 selectedFile(event) {
+  if (this.isFileExcel(event.target.files[0])){
 
+  console.log(event.target.files[0]['type'])
   this.interactionService.createLoading('Uploading Your Excel File !!')
     .then(() => {
       const formData = new FormData();
-      console.log(this.isFileImage(event.target.files[0]));
       formData.append('file', event.target.files[0]);
 
-      /**this.allProductService.postFile(formData)
+      this.allProductService.postFile(formData)
         .then((result: any) => {
           this.interactionService.hide();
           if (result && result !== false){
@@ -153,15 +154,19 @@ selectedFile(event) {
             this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
           }
     }   );
-    **/
+    
     }).catch(err => {
       this.interactionService.hide();
       this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
     });
+  }
+    else {
+      this.interactionService.createToast('You must select an Excel File !', 'danger', 'bottom');
+    }
 }
 
-isFileImage(file) {
-  const acceptedImageTypes = ['image/jpeg', 'image/png'];
+isFileExcel(file) {
+  const acceptedImageTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
 
   return file && acceptedImageTypes.includes(file['type'])
 }

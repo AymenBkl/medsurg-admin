@@ -36,7 +36,7 @@ export class InteractionService {
           this.presentingLoadingController = loading;
           this.presentingLoadingController.present()
           .then(() => {
-            resolve();
+            resolve(true);
           });
         });
       }
@@ -62,7 +62,7 @@ export class InteractionService {
             text: cancelBtn,
             role: 'cancel',
             handler: () => {
-              reject();
+              resolve(false);
             }
           },
           {
