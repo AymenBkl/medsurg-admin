@@ -138,21 +138,38 @@ export class EditProductComponent implements OnInit {
   }
 
   deleteProduct() {
-    this.interactionService.alertWithHandler('Do you want to delete this Product !', 'Alert' , 'CANCEL' , 'DELETE')
-        .then((result) => {
-          if (result == true){
-            this.productService.deleteProduct(this.currentProduct._id)
-            .then(result => {
-              if (result && result === true){
-                this.router.navigate[('/mainproducts')];
-              }
+    if (this.currentProduct.status == 'active'){
+      this.interactionService.alertWithHandler('Do you want to delete this Product !', 'Alert' , 'CANCEL' , 'DELETE')
+      .then((result) => {
+        if (result == true){
+          this.interactionService.createLoading('Deleting Product Please Wait !')
+            .then(() => {
+              this.productService.deleteProduct(this.currentProduct._id)
+              .then(result => {
+                this.interactionService.hide();
+                if (result && result === true){
+                  this.interactionService.createToast('Product Deleted !', 'success', 'bottom');
+                  this.modalCntrl.dismiss();
+                }
+                else {
+                  this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+                }
+              })
+              .catch(err => {
+                this.interactionService.hide();
+                this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+                console.log(err);
+              });
             })
-            .catch(err => {
-              console.log(err);
-            });
-          }
           
-        });
+        }
+        
+      });
+    }
+    else {
+      this.interactionService.createToast('Product Already Deleted !', 'primary', 'bottom');
+    }
+    
     }
 
 
@@ -160,15 +177,26 @@ export class EditProductComponent implements OnInit {
       this.interactionService.alertWithHandler('Do you want to remove this Product !', 'Alert' , 'CANCEL' , 'DELETE')
         .then((result) => {
           if (result == true){
-            this.categoryService.removeProductFromCategory(this.navParams.get('categoryId'),this.currentProduct._id)
-            .then(result => {
-              if (result && result === true){
-                this.modalCntrl.dismiss();
-              }
-            })
-            .catch(err => {
-              console.log(err);
-            });
+            this.interactionService.createLoading('Removing Product From Categories')
+              .then(() => {
+                this.categoryService.removeProductFromCategory(this.navParams.get('categoryId'),this.currentProduct._id)
+                .then(result => {
+                  this.interactionService.hide();
+                  if (result && result === true){
+                    this.interactionService.createToast('Product Removed !', 'success', 'bottom');
+                    this.modalCntrl.dismiss();
+                  }
+                  else {
+                    this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+                  }
+                })
+                .catch(err => {
+                  this.interactionService.hide();
+                  this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+                  console.log(err);
+                });
+              })
+            
           }
           
         });
