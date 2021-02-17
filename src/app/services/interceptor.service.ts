@@ -75,6 +75,8 @@ class ValidRequest {
        valid = false;
      }
    })
+   console.log(requestUrl,valid)
+
    return valid;
  }
 }

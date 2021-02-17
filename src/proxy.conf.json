@@ -1,0 +1,8 @@
+{
+  "/api/*": {
+    "target": "https://test.cashfree.com",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {"^/api" : ""}
+  }
+}
