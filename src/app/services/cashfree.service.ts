@@ -23,7 +23,7 @@ export class CashfreeService {
       paramForm.append('appId',config.cashfree.appId);
       paramForm.append('secretKey',config.cashfree.appKey);
       paramForm.append('orderId',orderId);
-        this.httpClient.post('http://127.0.0.1:3000/https://test.cashfree.com/api/v1/order/info/status',paramForm.toString(),header)
+        this.httpClient.post('http://localhost:8092/cors/https://test.cashfree.com/api/v1/order/info/status',paramForm.toString(),header)
           .subscribe(data => {
             resolve(data)
           },err => {
