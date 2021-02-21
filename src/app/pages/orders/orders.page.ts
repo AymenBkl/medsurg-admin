@@ -109,7 +109,6 @@ export class OrdersPage implements OnInit {
   }
 
   async filterOrders(orders: Order[]) {
-    console.log(orders);
     this.allOrder =
     {
       PAID: {

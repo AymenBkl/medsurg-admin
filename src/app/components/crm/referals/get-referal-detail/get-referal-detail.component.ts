@@ -115,39 +115,53 @@ export class GetReferalDetailComponent implements OnInit {
     }
   }
 
-  filterOrders(orders: Order[]) {
-    orders.map(async (order) => {
-      if (order.method == 'cod') {
-        this.allOrder.PAID.ALL.all.push(order);
-        this.allOrder.PAID.SUCCESS[order.status].push(order);
-        this.allOrder.PAID.SUCCESS.all.push(order);
-
+  async filterOrders(orders: Order[]) {
+    this.allOrder =
+    {
+      PAID: {
+        PENDING: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+        SUCCESS: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+        FAILED: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+        ALL: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+        ACTIVE: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] }
+      },
+      'NOT PAIED': {
+        PENDING: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+        SUCCESS: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+        FAILED: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+        ALL: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] },
+        ACTIVE: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] }
       }
-      else {
-        await this.checkPaymentStatus(order);
-        this.allOrder[order.payedByAdmin].ALL.all.push(order);
-        this.allOrder[order.payedByAdmin].ALL[order.status].push(order);
-      }
-    });
-  }
-
-  async checkPaymentStatus(order: Order) {
-    if (order.method == 'card') {
-      await this.cashfree.paymentStatus(order._id)
+    }
+    for(let order of orders){
+      let r = await this.cashfree.paymentStatus(order._id)
         .then(async (paymentStatus: PaymentStatus) => {
-          order.paymentStatus = paymentStatus;
-          if (order.paymentStatus && order.paymentStatus.txStatus) {
-            this.allOrder[order.payedByAdmin][order.paymentStatus.txStatus].all.push(order)
-            this.allOrder[order.payedByAdmin][order.paymentStatus.txStatus][order.status].push(order);
+          if (order.method == 'card' && paymentStatus.status == 'OK') {
+            let result = await this.affectCard(order, paymentStatus);
           }
-          else if (order.paymentStatus && !order.paymentStatus.txStatus) {
-            this.allOrder[order.payedByAdmin][order.paymentStatus.orderStatus].all.push(order)
-            this.allOrder[order.payedByAdmin][order.paymentStatus.orderStatus][order.status].push(order);
+          else if (order.method == 'cod' && paymentStatus.status == 'ERROR'){
+            this.allOrder.PAID.ALL.all.push(order);
+            this.allOrder.PAID.SUCCESS[order.status].push(order);
+            this.allOrder.PAID.SUCCESS.all.push(order);
           }
         })
-    }
+      console.log(this.allOrder);
+    };
   }
 
+  async affectCard(order: Order,paymentStatus) {
+    order.paymentStatus = paymentStatus;
+    this.allOrder[order.payedByAdmin].ALL.all.push(order);
+    this.allOrder[order.payedByAdmin].ALL[order.status].push(order);
+    if (order.paymentStatus && order.paymentStatus.txStatus) {
+      this.allOrder[order.payedByAdmin][order.paymentStatus.txStatus].all.push(order)
+      this.allOrder[order.payedByAdmin][order.paymentStatus.txStatus][order.status].push(order);
+    }
+    else if (order.paymentStatus && !order.paymentStatus.txStatus) {
+      this.allOrder[order.payedByAdmin][order.paymentStatus.orderStatus].all.push(order)
+      this.allOrder[order.payedByAdmin][order.paymentStatus.orderStatus][order.status].push(order);
+    }
+  }
   segmentChanged(event) {
     this.currentSegmentType = event.detail.value;
   }
