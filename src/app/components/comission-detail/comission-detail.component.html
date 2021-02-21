@@ -12,7 +12,7 @@
       </ion-item>
     </ion-col>
     <ion-col size="12">
-      <ion-button class="buttons" [disabled]="commission.commission < 0 || commission.commission == null || submitted" (click)="updateCommission()" shape="round" size="default" expand="full">
+      <ion-button class="buttons" [disabled]="commission.commission < 0 || commission.commission == null || submitted || commission.commission >= 100" (click)="updateCommission()" shape="round" size="default" expand="full">
         <ion-label *ngIf="!submitted">Update Referal Commision </ion-label>
         <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
       </ion-button>

@@ -30,12 +30,13 @@ export class ComissionDetailComponent implements OnInit {
   }
 
   updateCommission(){
-    this.submitted = true;
-    this.orderService.updateCommission(this.commission._id,this.commission.commission)
+    if (this.commission.commission >= 0 && this.commission.commission < 100){
+      this.submitted = true;
+      this.orderService.updateCommission(this.commission._id,this.commission.commission)
       .then((result:any) => {
         this.submitted = false;
         if (result && result != false){
-          this.intercationService.createToast('You Commission has been Updated','success','bottom');
+          this.intercationService.createToast('Your Commission has been Updated','success','bottom');
           this.back();
         }
         else {
@@ -46,6 +47,8 @@ export class ComissionDetailComponent implements OnInit {
         this.submitted = false;
         this.intercationService.createToast('Something Went Wrong !','danger','bottom');
       })
+    }
+   
   }
 
 }
