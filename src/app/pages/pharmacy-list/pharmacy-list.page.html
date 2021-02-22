@@ -33,17 +33,15 @@
        </ion-col>
      </ion-row>
       <ion-row class="row header">
-        <ion-col size="2" class="col">Full Name</ion-col>
-        <ion-col size="2" class="col">Phone Number</ion-col>
-        <ion-col size="2" class="col">Referral code</ion-col>
+        <ion-col size="3" class="col">Full Name</ion-col>
+        <ion-col size="3" class="col">Phone Number</ion-col>
         <ion-col size="2" class="col">Profile</ion-col>
         <ion-col size="2" class="col">Order History</ion-col>
         <ion-col size="2" class="col">Block User</ion-col>
       </ion-row>
       <ion-row class="row" *ngFor="let pharmacy of searchPharmacies">
-        <ion-col size="2" class="col">{{pharmacy.firstname}}</ion-col>
-        <ion-col size="2" class="col">{{pharmacy.phoneNumber}}</ion-col>
-        <ion-col size="2" class="col">none</ion-col>
+        <ion-col size="3" class="col">{{pharmacy.firstname}}</ion-col>
+        <ion-col size="3" class="col">{{pharmacy.phoneNumber}}</ion-col>
         <ion-col size="2" class="col center "><ion-button class="button-xyz operation" (click)="editPharmacy(pharmacy)"><ion-icon class="edit" name="create-outline"></ion-icon></ion-button></ion-col>
         <ion-col size="2" class="col center "><ion-button expand="block" class="button" (click)="goTo(pharmacy._id)"  >Details </ion-button></ion-col>
         <ion-col size="2" class="col center " *ngIf="!pharmacy.status || pharmacy.status != 'blocked'" ><ion-button class="button-xyz operation" (click)="blockUnBlockUser(pharmacy,'blocked')"><ion-icon class="block" name="lock-closed-outline"></ion-icon></ion-button></ion-col>
