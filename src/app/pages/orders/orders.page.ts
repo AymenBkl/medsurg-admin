@@ -82,7 +82,7 @@ export class OrdersPage implements OnInit {
               }
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('User dont have any orders !', 'warning', 'bottom');
             }
           })
           .catch(err => {

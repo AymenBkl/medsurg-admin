@@ -69,22 +69,23 @@ export class UserOrdersPage implements OnInit {
   }
 
 
-  getAllOrders() {
-    this.interactionService.createLoading("Loading Your Orders !! ..")
+  getAllOrders(userId: string) {
+    this.interactionService.createLoading("Loading User Orders !! ..")
       .then(() => {
-        this.ordersService.getOrders()
+        this.ordersService.getUserOrders(userId)
           .then((result: any) => {
             this.interactionService.hide();
             if (result && result != false) {
               if (result.length != 0) {
-                this.interactionService.createToast('Your Orders has been loaded !', 'success', 'bottom');
+                this.filterOrders(result);
+                this.interactionService.createToast('User Orders has been loaded !', 'success', 'bottom');
               }
               else {
-                this.interactionService.createToast('You dont have any orders !', 'warning', 'bottom');
+                this.interactionService.createToast('User dont have any orders !', 'warning', 'bottom');
               }
             }
             else {
-              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              this.interactionService.createToast('User dont have any orders !', 'warning', 'bottom');
             }
           })
           .catch(err => {
@@ -99,12 +100,7 @@ export class UserOrdersPage implements OnInit {
       })
   }
 
-  subscribetoOrders() {
-    this.ordersService.getOrderSubject()
-      .subscribe(orders => {
-        this.filterOrders(orders);
-      })
-  }
+  
 
   goToOrderDetail(order: Order) {
     this.modalControllerOrder.callEditOrder(this.currentUser, order)
@@ -128,13 +124,13 @@ export class UserOrdersPage implements OnInit {
         ACTIVE: { created: [], accepted: [], canceled: [], rejected: [], delivered: [], all: [] }
       }
     }
-    for(let order of orders){
+    for (let order of orders) {
       let r = await this.cashfree.paymentStatus(order._id)
         .then(async (paymentStatus: PaymentStatus) => {
           if (order.method == 'card' && paymentStatus.status == 'OK') {
             let result = await this.affectCard(order, paymentStatus);
           }
-          else if (order.method == 'cod' && paymentStatus.status == 'ERROR'){
+          else if (order.method == 'cod' && paymentStatus.status == 'ERROR') {
             this.allOrder.PAID.ALL.all.push(order);
             this.allOrder.PAID.SUCCESS[order.status].push(order);
             this.allOrder.PAID.SUCCESS.all.push(order);
@@ -144,7 +140,7 @@ export class UserOrdersPage implements OnInit {
     };
   }
 
-  async affectCard(order: Order,paymentStatus) {
+  async affectCard(order: Order, paymentStatus) {
     order.paymentStatus = paymentStatus;
     this.allOrder[order.payedByAdmin].ALL.all.push(order);
     this.allOrder[order.payedByAdmin].ALL[order.status].push(order);
@@ -170,11 +166,12 @@ export class UserOrdersPage implements OnInit {
     this.currentSegmentTypePAID = event.detail.value;
   }
 
-  ionViewDidEnter(){
-    /**this.currentUser = this.authService.user;
-    this.subscribetoOrders();
-    this.getAllOrders();**/
-    console.log(this.router.snapshot.paramMap.get('id'));
+  ionViewDidEnter() {
+    const id = this.router.snapshot.paramMap.get('id')
+    if (id && id != '') {
+      this.currentUser = this.authService.user;
+      this.getAllOrders(id);
+    }
   }
 
 

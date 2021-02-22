@@ -46,6 +46,26 @@ export class OrderService {
       });
   }
 
+  getUserOrders(id:string){
+    return new Promise((resolve, reject) => {
+      this.httpClient.get<OrderResponse>(this.orderUrl + 'userallorders/' + id)
+        .subscribe(response => {
+          console.log(response);
+          if (response.status === 200) {
+            console.log(response.message)
+            resolve(response.message);
+          }
+        }, err => {
+          if (err.status == 404) {
+            resolve(false)
+          }
+          else {
+            reject(err);
+          }
+        });
+      });
+  }
+
   payPharmacy(orderId:string,commission: number){
     return new Promise((resolve, reject) => {
       this.httpClient.put<OrderResponse>(this.orderUrl + 'paypharmacy/' + orderId, {payedByAdmin : 'PAID',commission:commission})
