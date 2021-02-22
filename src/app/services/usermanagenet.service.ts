@@ -14,9 +14,25 @@ export class UsermanagenetService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getUsers() {
+  getPatients() {
     return new Promise((resolve, reject) => {
       this.httpClient.get<AuthResponse>(this.userUrl + "usermanagement/patients")
+        .subscribe(response => {
+          if (response && response.status == 200){
+            resolve(response.user);
+          }
+          else {
+            resolve(false);
+          }
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
+  getPharmacies() {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get<AuthResponse>(this.userUrl + "usermanagement/pharmacies")
         .subscribe(response => {
           if (response && response.status == 200){
             resolve(response.user);

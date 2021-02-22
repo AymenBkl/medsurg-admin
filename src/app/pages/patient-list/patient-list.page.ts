@@ -33,7 +33,7 @@ export class PatientListPage implements OnInit {
   getPatients(){
     this.interactionService.createLoading("Loading Patients")
       .then(() => {
-        this.usermanagenetService.getUsers()
+        this.usermanagenetService.getPatients()
         .then((result: any) => {
           this.interactionService.hide();
           if (result && result != false){

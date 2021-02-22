@@ -34,7 +34,7 @@ export class PharmacyListPage implements OnInit {
   getPharmacies(){
     this.interactionService.createLoading("Loading Pharmacies")
       .then(() => {
-        this.usermanagenetService.getUsers()
+        this.usermanagenetService.getPharmacies()
         .then((result: any) => {
           this.interactionService.hide();
           if (result && result != false){
