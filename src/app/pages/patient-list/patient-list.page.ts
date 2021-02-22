@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { EditUserComponent } from 'src/app/components/user/edit-user/edit-user.component';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -15,7 +17,8 @@ export class PatientListPage implements OnInit {
   searchPatients : User[];
   constructor(private usermanagenetService: UsermanagenetService,
               private interactionService: InteractionService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private modalCntrl: ModalController) { }
 
   ngOnInit() {
     this.getUser();
@@ -49,6 +52,20 @@ export class PatientListPage implements OnInit {
         })
       })
     
+  }
+
+  async editPatient(patient: User){
+    const modal = await this.modalCntrl.create({
+      component : EditUserComponent,
+      componentProps : {
+          patient: patient,
+      }
+      
+  });
+  modal.onDidDismiss()
+      .then(data => {
+      });
+  return await modal.present();
   }
 
 

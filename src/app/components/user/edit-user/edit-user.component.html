@@ -1,3 +1,23 @@
-<p>
-  edit-user works!
-</p>
+<app-header [page]="'Edit User'" [type]="'modal'">
+
+<ion-content>
+  <ion-row *ngIf="patient">
+    <form novalidate  [formGroup]="profileForm"  class="form" (ngSubmit)="update()" data-aos="fade-up">
+      <ion-item lines="none" class="ion-input" data-aos="fade-up" data-aos-duration="3000">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-input placeHolder="Firstname" formControlName="firstname"></ion-input>
+      </ion-item>
+      <ion-label class="label-error" *ngIf="formErrors && formErrors.firstname">*{{formErrors.firstname}}</ion-label>
+  
+      <ion-item lines="none" class="ion-input">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-input placeHolder="Lastname" formControlName="lastname"></ion-input>
+      </ion-item>
+      <ion-label class="label-error" *ngIf="formErrors && formErrors.lastname">*{{formErrors.lastname}}</ion-label>
+      <ion-button class="buttons" [disabled]="profileForm.invalid || submitted" (click)="update()" shape="round" size="default" expand="full">
+        <ion-label *ngIf="!submitted">UPDATE</ion-label>
+        <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+      </ion-button>
+    </form>
+  </ion-row>
+</ion-content>

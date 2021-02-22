@@ -24,6 +24,7 @@ import { AddProductToCategoryComponent } from '../add-product-to-category/add-pr
 import { RefundDetailComponent } from '../crm/orders/refund-detail/refund-detail.component';
 import { ComissionDetailComponent } from '../comission-detail/comission-detail.component';
 import { PaymentGetwayComponent } from '../payment-getway/payment-getway.component';
+import { EditUserComponent } from '../user/edit-user/edit-user.component';
 @NgModule({
   declarations: [
     EditProductComponent,
@@ -41,7 +42,8 @@ import { PaymentGetwayComponent } from '../payment-getway/payment-getway.compone
     AddProductToCategoryComponent,
     RefundDetailComponent,
     ComissionDetailComponent,
-    PaymentGetwayComponent
+    PaymentGetwayComponent,
+    EditUserComponent,
   ],
   exports: [
     BannerComponent,
@@ -59,7 +61,8 @@ import { PaymentGetwayComponent } from '../payment-getway/payment-getway.compone
     AddProductToCategoryComponent, 
     RefundDetailComponent,
     ComissionDetailComponent,
-    PaymentGetwayComponent
+    PaymentGetwayComponent,
+    EditUserComponent
   ],
   imports: [
     IonicModule,
