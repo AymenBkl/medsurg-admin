@@ -1,5 +1,6 @@
 import { Address } from "./address";
 import { PaymentDetail } from "./paymentDetail";
+import { Referal } from "./referal";
 
 export interface User {
     _id: string;
@@ -16,4 +17,5 @@ export interface User {
     addresses:Address[];
     paymentDetail: PaymentDetail;
     status:string;
+    referalCode: string;
 }

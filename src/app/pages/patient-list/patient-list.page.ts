@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { EditUserComponent } from 'src/app/components/user/edit-user/edit-user.component';
+import { Referal } from 'src/app/interfaces/referal';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { ReferalService } from 'src/app/services/crm/referal.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { UsermanagenetService } from 'src/app/services/usermanagenet.service';
 
@@ -18,7 +20,8 @@ export class PatientListPage implements OnInit {
   constructor(private usermanagenetService: UsermanagenetService,
               private interactionService: InteractionService,
               private authService: AuthService,
-              private modalCntrl: ModalController) { }
+              private modalCntrl: ModalController,
+              private referalService: ReferalService) { }
 
   ngOnInit() {
     this.getUser();
@@ -27,6 +30,25 @@ export class PatientListPage implements OnInit {
 
   getUser(){
     this.currentUser = this.authService.user;
+  }
+
+
+  getReferal(){
+    this.referalService.getReferal()
+      .then((result: Referal[]) => {
+          if (result){
+            result.map(referal => {
+              console.log(referal.owner);
+              this.patients.filter(function(item) { return item._id === referal.owner._id; })[0].referalCode = referal.code;
+              
+            })
+          }
+          else {
+          }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
 
@@ -39,6 +61,7 @@ export class PatientListPage implements OnInit {
           if (result && result != false){
             this.patients = result;
             this.searchPatients = result;
+            this.getReferal();
             this.interactionService.createToast('Patients has been loaded !', 'success', 'bottom');
           }
           else {

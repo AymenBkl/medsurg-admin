@@ -43,7 +43,7 @@
       <ion-row class="row" *ngFor="let patient of searchPatients">
         <ion-col size="2" class="col">{{patient.firstname}}</ion-col>
         <ion-col size="2" class="col">{{patient.phoneNumber}}</ion-col>
-        <ion-col size="2" class="col">none</ion-col>
+        <ion-col size="2" class="col">{{patient.referalCode ? patient.referalCode : 'None'}}</ion-col>
         <ion-col size="2" class="col center "><ion-button class="button-xyz operation" (click)="editPatient(patient)"><ion-icon class="edit" name="create-outline"></ion-icon></ion-button></ion-col>
         <ion-col size="2" class="col center "><ion-button expand="block" class="button" (click)="goTo(patient._id)"  >Details </ion-button></ion-col>
         <ion-col size="2" class="col center " *ngIf="!patient.status || patient.status != 'blocked'" ><ion-button class="button-xyz operation" (click)="blockUnBlockUser(patient,'blocked')"><ion-icon class="block" name="lock-closed-outline"></ion-icon></ion-button></ion-col>
