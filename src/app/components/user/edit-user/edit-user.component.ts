@@ -22,6 +22,7 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit() {
     this.patient = this.navParams.get('patient');
+    console.log(this.patient)
     this.buildReactiveForm();
   }
 
@@ -43,7 +44,7 @@ export class EditUserComponent implements OnInit {
   }
 
   update(){
-    
+
   }
 
 }
