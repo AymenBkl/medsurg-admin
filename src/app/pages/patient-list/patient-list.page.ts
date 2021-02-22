@@ -19,18 +19,28 @@ export class PatientListPage implements OnInit {
 
 
   getPatients(){
-    this.usermanagenetService.getPatients()
-      .then((result: any) => {
-        if (result && result != false){
-          this.patients = result;
-        }
-        else {
-          
-        }
-      })
-      .catch(err => {
+    this.interactionService.createLoading("Loading Patients")
+      .then(() => {
+        this.usermanagenetService.getPatients()
+        .then((result: any) => {
+          this.interactionService.hide();
+          if (result && result != false){
+            this.patients = result;
+            this.interactionService.createToast('Patients has been loaded !', 'success', 'bottom');
+          }
+          else {
+            this.interactionService.createToast('No Patients Found !', 'light', 'bottom');
+          }
+        })
+        .catch(err => {
+          this.interactionService.hide();
+          this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
 
+        })
       })
+    
   }
+
+
 
 }
