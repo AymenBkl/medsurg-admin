@@ -40,7 +40,8 @@
           <ion-note *ngIf="isAuth" class="support">Users</ion-note>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of users; let i = index">
             <ion-item *ngIf="p.auth == isAuth && p.title != 'Logout'" (click)="selectedIndex = i;selectBlock(4)" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i && selectedBlock == 4">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-icon *ngIf="!p.remote" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-icon *ngIf="p.remote" slot="start" [src]='p.icon'></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>

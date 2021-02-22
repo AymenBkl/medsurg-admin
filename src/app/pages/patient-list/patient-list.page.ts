@@ -13,6 +13,7 @@ export class PatientListPage implements OnInit {
               private interactionService: InteractionService) { }
 
   ngOnInit() {
+    this.getPatients();
   }
 
 
@@ -22,7 +23,7 @@ export class PatientListPage implements OnInit {
 
       })
       .catch(err => {
-        
+
       })
   }
 

@@ -116,18 +116,21 @@ export class AppComponent implements OnInit {
       title: 'Patients',
       url: 'patient-list',
       icon: '../assets/imgs/patient.svg',
+      remote:true,
       auth : true
     },
     {
       title: 'Pharmacies',
       url: 'patient-list',
       icon: '../assets/imgs/pharmacy.png',
+      remote:true,
       auth : true
     },
     {
       title: 'Messages From Users',
       url: 'messages',
       icon: 'chatbubble',
+      remote:false,
       auth : true
     },
 

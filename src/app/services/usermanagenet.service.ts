@@ -15,7 +15,7 @@ export class UsermanagenetService {
 
   getPatients() {
     return new Promise((resolve, reject) => {
-      this.httpClient.get<AuthResponse>(this.userUrl + "account/user/usermanagement/patients")
+      this.httpClient.get<AuthResponse>(this.userUrl + "usermanagement/patients")
         .subscribe(response => {
           console.log(response);
         }, err => {
