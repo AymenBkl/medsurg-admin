@@ -31,7 +31,7 @@ export class UsermanagenetService {
   }
 
 
-  updateUser(id:string,user: User){
+  updateUser(id:string,user: any){
     return new Promise((resolve, reject) => {
       this.httpClient.put<AuthResponse>(this.userUrl + "usermanagement/updateuser/" + id,{user:user})
         .subscribe(response => {

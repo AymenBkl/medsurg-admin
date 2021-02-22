@@ -69,6 +69,36 @@ export class PatientListPage implements OnInit {
   }
 
 
+  blockUnBlockUser(patient: User,status: string) {
+    const msg = status != 'active' ? "Block" : 'UnBlock'
+    this.interactionService.alertWithHandler("Do You want to " + msg + "Patient " + patient.firstname,'ALERT',"CANCEL",msg)
+      .then((result) => {
+        if (result) {
+          this.interactionService.createLoading('Updating User  information')
+          .then(() => {
+            console.log(patient._id)
+            this.usermanagenetService.updateUser(patient._id,{status:status})
+              .then((result: any) => {
+                this.interactionService.hide();
+                if (result && result !== false){
+                  this.interactionService.createToast('User Information Has Been Updated', 'success', 'bottom');
+                  patient.status = status;
+                }
+                else {
+                  this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+                }
+              })
+              .catch(err => {
+                this.interactionService.hide();
+                this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+              });
+          });
+        }
+      })
+    
+  }
+
+
 
   onInput(value){
     const patient = value;

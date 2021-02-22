@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavParams } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { UsermanagenetService } from 'src/app/services/usermanagenet.service';
@@ -20,7 +20,8 @@ export class EditUserComponent implements OnInit {
   constructor(private userManagementService: UsermanagenetService,
               private navParams: NavParams,
               private formBuilder: FormBuilder,
-              private interactionService: InteractionService) { }
+              private interactionService: InteractionService,
+              private modalCntrl: ModalController) { }
 
   ngOnInit() {
     this.patient = this.navParams.get('patient');
@@ -56,6 +57,7 @@ export class EditUserComponent implements OnInit {
             this.submitted = false;
             if (result && result !== false){
               this.interactionService.createToast('User Information Has Been Updated', 'success', 'bottom');
+              this.modalCntrl.dismiss();
             }
             else {
               this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
