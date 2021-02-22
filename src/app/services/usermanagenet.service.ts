@@ -14,7 +14,7 @@ export class UsermanagenetService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getPatients() {
+  getUsers() {
     return new Promise((resolve, reject) => {
       this.httpClient.get<AuthResponse>(this.userUrl + "usermanagement/patients")
         .subscribe(response => {

@@ -24,7 +24,7 @@ export class EditUserComponent implements OnInit {
               private modalCntrl: ModalController) { }
 
   ngOnInit() {
-    this.patient = this.navParams.get('patient');
+    this.patient = this.navParams.get('user');
     console.log(this.patient)
     this.buildReactiveForm();
   }

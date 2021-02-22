@@ -1,0 +1,53 @@
+
+<ion-header class="ion-no-border">
+  <ion-toolbar class="toolbar0">
+    <ion-buttons slot="start" class="button-header">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="title2">
+      <ion-text class="title1">
+        Admin
+      </ion-text>
+      <ion-chip class="chip" *ngIf="currentUser != null">
+        <ion-avatar class="img">
+          <img *ngIf="!currentUser || currentUser.imageUrl == '' " src="/assets/imgs/pharmacy.svg">
+          <img *ngIf="currentUser && currentUser.imageUrl != ''" [src]="currentUser.imageUrl">
+        </ion-avatar>
+      </ion-chip>
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar class="toolbar">
+  </ion-toolbar>
+  <ion-searchbar class="search_bar-xyz" cancelButtonText="Custom Cancel" showCancelButton="focus" animated (ionCancel)="searchProducts('')"
+    autocorrect="off" inputmode="search" (keyup.enter)="onInput(searchbar.value)" placeholder="Search pharmacy"
+    #searchbar>
+
+  </ion-searchbar>
+</ion-header>
+
+<ion-content>
+   <ion-grid class="">
+     <ion-row>
+       <ion-col size="12">
+          <ion-title class="title">Pharmacies</ion-title>
+       </ion-col>
+     </ion-row>
+      <ion-row class="row header">
+        <ion-col size="2" class="col">Full Name</ion-col>
+        <ion-col size="2" class="col">Phone Number</ion-col>
+        <ion-col size="2" class="col">Referral code</ion-col>
+        <ion-col size="2" class="col">Profile</ion-col>
+        <ion-col size="2" class="col">Order History</ion-col>
+        <ion-col size="2" class="col">Block User</ion-col>
+      </ion-row>
+      <ion-row class="row" *ngFor="let pharmacy of searchPharmacies">
+        <ion-col size="2" class="col">{{pharmacy.firstname}}</ion-col>
+        <ion-col size="2" class="col">{{pharmacy.phoneNumber}}</ion-col>
+        <ion-col size="2" class="col">none</ion-col>
+        <ion-col size="2" class="col center "><ion-button class="button-xyz operation" (click)="editPharmacy(pharmacy)"><ion-icon class="edit" name="create-outline"></ion-icon></ion-button></ion-col>
+        <ion-col size="2" class="col center "><ion-button expand="block" class="button" (click)="goTo(pharmacy._id)"  >Details </ion-button></ion-col>
+        <ion-col size="2" class="col center " *ngIf="!pharmacy.status || pharmacy.status != 'blocked'" ><ion-button class="button-xyz operation" (click)="blockUnBlockUser(pharmacy,'blocked')"><ion-icon class="block" name="lock-closed-outline"></ion-icon></ion-button></ion-col>
+        <ion-col size="2" class="col center " *ngIf="pharmacy.status && pharmacy.status == 'blocked'"><ion-button class="button-xyz operation" (click)="blockUnBlockUser(pharmacy,'active')"><ion-icon  class="unblock" name="lock-open-outline"></ion-icon></ion-button></ion-col>
+      </ion-row>
+   </ion-grid>
+</ion-content>

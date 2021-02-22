@@ -121,8 +121,8 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Pharmacies',
-      url: 'patient-list',
-      icon: '../assets/imgs/pharmacy.png',
+      url: 'pharmacy-list',
+      icon: '../assets/imgs/pharmacy.svg',
       remote:true,
       auth : true
     },

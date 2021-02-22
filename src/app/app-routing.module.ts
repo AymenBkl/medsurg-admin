@@ -92,6 +92,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/user-orders/user-orders.module').then( m => m.UserOrdersPageModule),
     canActivate : [AuthGuard]
   },
+  {
+    path: 'pharmacy-list',
+    loadChildren: () => import('./pages/pharmacy-list/pharmacy-list.module').then( m => m.PharmacyListPageModule),
+    canActivate : [AuthGuard]
+  },
 ];
 
 @NgModule({

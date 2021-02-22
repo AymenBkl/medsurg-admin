@@ -7,14 +7,15 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { UsermanagenetService } from 'src/app/services/usermanagenet.service';
 
 @Component({
-  selector: 'app-patient-list',
-  templateUrl: './patient-list.page.html',
-  styleUrls: ['./patient-list.page.scss'],
+  selector: 'app-pharmacy-list',
+  templateUrl: './pharmacy-list.page.html',
+  styleUrls: ['./pharmacy-list.page.scss'],
 })
-export class PatientListPage implements OnInit {
-  patients: User[];
+export class PharmacyListPage implements OnInit {
+
+  pharmacies: User[];
   currentUser: User;
-  searchPatients : User[];
+  searchPharmacies : User[];
   constructor(private usermanagenetService: UsermanagenetService,
               private interactionService: InteractionService,
               private authService: AuthService,
@@ -22,7 +23,7 @@ export class PatientListPage implements OnInit {
 
   ngOnInit() {
     this.getUser();
-    this.getPatients();
+    this.getPharmacies();
   }
 
   getUser(){
@@ -30,19 +31,19 @@ export class PatientListPage implements OnInit {
   }
 
 
-  getPatients(){
-    this.interactionService.createLoading("Loading Patients")
+  getPharmacies(){
+    this.interactionService.createLoading("Loading Pharmacies")
       .then(() => {
         this.usermanagenetService.getUsers()
         .then((result: any) => {
           this.interactionService.hide();
           if (result && result != false){
-            this.patients = result;
-            this.searchPatients = result;
-            this.interactionService.createToast('Patients has been loaded !', 'success', 'bottom');
+            this.pharmacies = result;
+            this.searchPharmacies = result;
+            this.interactionService.createToast('Pharmacies has been loaded !', 'success', 'bottom');
           }
           else {
-            this.interactionService.createToast('No Patients Found !', 'light', 'bottom');
+            this.interactionService.createToast('No Pharmacies Found !', 'light', 'bottom');
           }
         })
         .catch(err => {
@@ -54,11 +55,11 @@ export class PatientListPage implements OnInit {
     
   }
 
-  async editPatient(patient: User){
+  async editPharmacy(pharmacy: User){
     const modal = await this.modalCntrl.create({
       component : EditUserComponent,
       componentProps : {
-          user: patient,
+          user: pharmacy,
       }
       
   });
@@ -69,20 +70,20 @@ export class PatientListPage implements OnInit {
   }
 
 
-  blockUnBlockUser(patient: User,status: string) {
+  blockUnBlockUser(pharmacy: User,status: string) {
     const msg = status != 'active' ? "Block" : 'UnBlock'
-    this.interactionService.alertWithHandler("Do You want to " + msg + "Patient " + patient.firstname,'ALERT',"CANCEL",msg)
+    this.interactionService.alertWithHandler("Do You want to " + msg + "pharmacy " + pharmacy.firstname,'ALERT',"CANCEL",msg)
       .then((result) => {
         if (result) {
           this.interactionService.createLoading('Updating User  information')
           .then(() => {
-            console.log(patient._id)
-            this.usermanagenetService.updateUser(patient._id,{status:status})
+            console.log(pharmacy._id)
+            this.usermanagenetService.updateUser(pharmacy._id,{status:status})
               .then((result: any) => {
                 this.interactionService.hide();
                 if (result && result !== false){
                   this.interactionService.createToast('User Information Has Been Updated', 'success', 'bottom');
-                  patient.status = status;
+                  pharmacy.status = status;
                 }
                 else {
                   this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
@@ -99,22 +100,20 @@ export class PatientListPage implements OnInit {
   }
 
   goTo(id: string){
-    window.open('/user-orders/patient/'+ id, "_blank");
+    window.open('/user-orders/pharmacy/'+ id, "_blank");
   }
 
 
 
   onInput(value){
-    const patient = value;
-    this.searchProducts(patient);
+    const pharmacy = value;
+    this.searchProducts(pharmacy);
   }
   
   searchProducts(medecin: string) {
-    this.searchPatients= this.patients.filter(patient => 
-      (patient.firstname && patient.lastname) && (patient.firstname + patient.lastname).toLowerCase().includes(medecin.toLowerCase())
+    this.searchPharmacies = this.pharmacies.filter(pharmacy => 
+      (pharmacy.firstname && pharmacy.lastname) && (pharmacy.firstname + pharmacy.lastname).toLowerCase().includes(medecin.toLowerCase())
     )
   }
-
-
 
 }
