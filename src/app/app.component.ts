@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
       icon: '../assets/imgs/pills.svg',
       auth : true
     },
-  ]
+  ];
 
   public raport = [
     {
@@ -112,6 +112,18 @@ export class AppComponent implements OnInit {
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   public users = [
+    {
+      title: 'Patients',
+      url: 'patient-list',
+      icon: '../assets/imgs/patient.svg',
+      auth : true
+    },
+    {
+      title: 'Pharmacies',
+      url: 'patient-list',
+      icon: '../assets/imgs/pharmacy.png',
+      auth : true
+    },
     {
       title: 'Messages From Users',
       url: 'messages',

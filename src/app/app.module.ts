@@ -34,6 +34,7 @@ import { OrderService } from './services/crm/order.service';
 import { ReferalService } from './services/crm/referal.service';
 import { AllproductsService } from './services/crm/allproducts.service';
 import { PrescriptionService } from './services/prescription.service';
+import { UsermanagenetService } from './services/usermanagenet.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -65,6 +66,7 @@ import { PrescriptionService } from './services/prescription.service';
     AllproductsService,
     File,
     PrescriptionService,
+    UsermanagenetService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
