@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/user';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { UsermanagenetService } from 'src/app/services/usermanagenet.service';
 
@@ -8,7 +9,7 @@ import { UsermanagenetService } from 'src/app/services/usermanagenet.service';
   styleUrls: ['./patient-list.page.scss'],
 })
 export class PatientListPage implements OnInit {
-
+  patients: User[];
   constructor(private usermanagenetService: UsermanagenetService,
               private interactionService: InteractionService) { }
 
@@ -19,8 +20,13 @@ export class PatientListPage implements OnInit {
 
   getPatients(){
     this.usermanagenetService.getPatients()
-      .then((result) => {
-
+      .then((result: any) => {
+        if (result && result != false){
+          this.patients = result;
+        }
+        else {
+          
+        }
       })
       .catch(err => {
 

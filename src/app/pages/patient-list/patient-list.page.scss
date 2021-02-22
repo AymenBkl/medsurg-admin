@@ -1,6 +1,4 @@
-body {
-    cursor: url('http://ionicframework.com/img/finger.png'), auto;
-}
+
 
 .header .col {
     background-color:lightgrey;
@@ -12,10 +10,40 @@ body {
     border-right-style: none;
 }
 
+.center {
+    text-align: center;
+}
+
 .col:last-child {
     border-right: solid 1px grey;
 }
 
 .row:last-child .col {
     border-bottom: solid 1px grey;
+}
+
+
+.button{
+    text-align: center;
+    width: 100%;
+    text-emphasis: center;
+    font-size: 7px;
+}
+.operation {
+    --background: none;
+    text-align: center;
+}
+.block {
+    color:red;
+    font-size: 26px;
+}
+
+.unblock {
+    color:green;
+    font-size: 26px;
+}
+
+.edit {
+    font-size: 26px;
+    color:black
 }

@@ -12,6 +12,7 @@ export interface User {
     imageUrl: string;
     setup: boolean;
     emailVerified: boolean;
+    phoneNumber:number;
     addresses:Address[];
     paymentDetail: PaymentDetail;
     status:string;

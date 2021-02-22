@@ -17,9 +17,14 @@ export class UsermanagenetService {
     return new Promise((resolve, reject) => {
       this.httpClient.get<AuthResponse>(this.userUrl + "usermanagement/patients")
         .subscribe(response => {
-          console.log(response);
+          if (response && response.status == 200){
+            resolve(response.user);
+          }
+          else {
+            resolve(false);
+          }
         }, err => {
-          console.log(err);
+          reject(err);
         });
     });
   }
