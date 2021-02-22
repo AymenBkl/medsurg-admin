@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { UsermanagenetService } from 'src/app/services/usermanagenet.service';
 
@@ -10,11 +11,19 @@ import { UsermanagenetService } from 'src/app/services/usermanagenet.service';
 })
 export class PatientListPage implements OnInit {
   patients: User[];
+  currentUser: User;
+  searchPatients : User[];
   constructor(private usermanagenetService: UsermanagenetService,
-              private interactionService: InteractionService) { }
+              private interactionService: InteractionService,
+              private authService: AuthService) { }
 
   ngOnInit() {
+    this.getUser();
     this.getPatients();
+  }
+
+  getUser(){
+    this.currentUser = this.authService.user;
   }
 
 
@@ -26,6 +35,7 @@ export class PatientListPage implements OnInit {
           this.interactionService.hide();
           if (result && result != false){
             this.patients = result;
+            this.searchPatients = result;
             this.interactionService.createToast('Patients has been loaded !', 'success', 'bottom');
           }
           else {
@@ -39,6 +49,19 @@ export class PatientListPage implements OnInit {
         })
       })
     
+  }
+
+
+
+  onInput(value){
+    const patient = value;
+    this.searchProducts(patient);
+  }
+  
+  searchProducts(medecin: string) {
+    this.searchPatients= this.patients.filter(patient => 
+      (patient.firstname && patient.lastname) && (patient.firstname + patient.lastname).toLowerCase().includes(medecin.toLowerCase())
+    )
   }
 
 

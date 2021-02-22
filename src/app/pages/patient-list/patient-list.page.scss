@@ -23,7 +23,7 @@
 }
 
 
-.button{
+.button-xyz{
     text-align: center;
     width: 100%;
     text-emphasis: center;
@@ -51,7 +51,67 @@
 .title {
     font-size: 30px;
     font-weight: bold;
-    padding: 30px;
     text-align: center;
+    margin-bottom: 15px;
     width: 100%;
+}
+
+
+.toolbar0 {
+    --min-height : 50px;
+    --background: #2B91BF !important;
+}
+.button-header {
+    padding: 0px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 15px;
+}
+        
+.title1 {
+    display: inline-block;
+        
+}
+.title2 {
+    text-align: center;
+    color: white;
+    width: 100%;
+    position: relative;
+}
+
+.img {
+    height: 25px;
+    margin: 0 auto;
+    width: 25px;
+}
+        
+.chip {
+    padding: 0px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -7px;
+    right: 15px;
+}
+
+.search_bar-xyz {
+    --background: white;
+    --border-radius: 50px;
+    --color: black;
+    --icon-color : black;
+    --cancel-button-color : red;
+    --box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    text-align: center;
+    top : -35px;
+    width: 95%;
+    margin: 0 auto;
+    z-index: 99;
+    padding: 15px;
+    position: relative;
+  }
+.toolbar {
+    --background: #2B91BF !important;
+    border-bottom-right-radius: 25px !important;
+    border-bottom-left-radius: 25px !important;
 }
