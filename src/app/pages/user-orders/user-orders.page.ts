@@ -8,6 +8,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { ModalControllersOrders } from 'src/app/classes/modalController.orders';
 import { PaymentStatus } from 'src/app/interfaces/paymentStatus';
 import { CashfreeService } from 'src/app/services/cashfree.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-orders',
@@ -59,7 +60,8 @@ export class UserOrdersPage implements OnInit {
     private authService: AuthService,
     private interactionService: InteractionService,
     private modalCntrl: ModalController,
-    private cashfree: CashfreeService) {
+    private cashfree: CashfreeService,
+    private router: ActivatedRoute) {
     this.modalControllerOrder = new ModalControllersOrders(this.modalCntrl);
   }
 
@@ -169,9 +171,10 @@ export class UserOrdersPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.currentUser = this.authService.user;
+    /**this.currentUser = this.authService.user;
     this.subscribetoOrders();
-    this.getAllOrders();
+    this.getAllOrders();**/
+    console.log(this.router.snapshot.paramMap.get('id'));
   }
 
 

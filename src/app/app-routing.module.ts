@@ -89,7 +89,8 @@ const routes: Routes = [
   },
   {
     path: 'user-orders',
-    loadChildren: () => import('./pages/user-orders/user-orders.module').then( m => m.UserOrdersPageModule)
+    loadChildren: () => import('./pages/user-orders/user-orders.module').then( m => m.UserOrdersPageModule),
+    canActivate : [AuthGuard]
   },
 ];
 

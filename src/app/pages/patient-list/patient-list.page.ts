@@ -98,6 +98,10 @@ export class PatientListPage implements OnInit {
     
   }
 
+  goTo(id: string){
+    window.open('/user-orders/patient/'+ id, "_blank");
+  }
+
 
 
   onInput(value){
