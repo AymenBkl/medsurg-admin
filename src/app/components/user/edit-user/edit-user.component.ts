@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavParams } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { UsermanagenetService } from 'src/app/services/usermanagenet.service';
 import { onValueChanged } from './valueChanges';
 
@@ -16,9 +17,10 @@ export class EditUserComponent implements OnInit {
   profileForm: FormGroup;
   formErrors:any;
   submitted: boolean = false;
-  constructor(private userManagementServoce: UsermanagenetService,
+  constructor(private userManagementService: UsermanagenetService,
               private navParams: NavParams,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private interactionService: InteractionService) { }
 
   ngOnInit() {
     this.patient = this.navParams.get('patient');
@@ -43,8 +45,28 @@ export class EditUserComponent implements OnInit {
     
   }
 
-  update(){
-
+  update() {
+    this.submitted = true;
+    this.interactionService.createLoading('Updating User  information')
+      .then(() => {
+        console.log(this.patient._id)
+        this.userManagementService.updateUser(this.patient._id,this.profileForm.value)
+          .then((result: any) => {
+            this.interactionService.hide();
+            this.submitted = false;
+            if (result && result !== false){
+              this.interactionService.createToast('User Information Has Been Updated', 'success', 'bottom');
+            }
+            else {
+              this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+            }
+          })
+          .catch(err => {
+            this.submitted = false;
+            this.interactionService.hide();
+            this.interactionService.createToast('Something Went Wrong !', 'danger', 'bottom');
+          });
+      });
   }
 
 }
