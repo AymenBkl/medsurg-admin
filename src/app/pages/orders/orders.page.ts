@@ -68,14 +68,14 @@ export class OrdersPage implements OnInit {
 
 
   getAllOrders() {
-    this.interactionService.createLoading("Loading Your Orders !! ..")
+    this.interactionService.createLoading("Loading Orders !! ..")
       .then(() => {
         this.ordersService.getOrders()
           .then((result: any) => {
             this.interactionService.hide();
             if (result && result != false) {
               if (result.length != 0) {
-                this.interactionService.createToast('Your Orders has been loaded !', 'success', 'bottom');
+                this.interactionService.createToast('Orders has been loaded !', 'success', 'bottom');
               }
               else {
                 this.interactionService.createToast('You dont have any orders !', 'warning', 'bottom');
@@ -133,9 +133,10 @@ export class OrdersPage implements OnInit {
             let result = await this.affectCard(order, paymentStatus);
           }
           else if (order.method == 'cod' && paymentStatus.status == 'ERROR'){
-            this.allOrder.PAID.ALL.all.push(order);
-            this.allOrder.PAID.SUCCESS[order.status].push(order);
-            this.allOrder.PAID.SUCCESS.all.push(order);
+            let paied = order.status == 'delivered' ? 'PAID' : 'NOT PAIED'
+            this.allOrder[paied].ALL.all.push(order);
+            this.allOrder[paied].SUCCESS[order.status].push(order);
+            this.allOrder[paied].SUCCESS.all.push(order);
           }
         })
       console.log(this.allOrder);
