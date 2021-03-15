@@ -12,9 +12,12 @@
       </ion-item>
       <ion-item class="profile-holder" *ngIf="commission.name == 'Pay Pharmacy' || commission.name == 'Referal'">
         <div class="header">
-        <ion-text class="name">
-          Paying ₹{{order.totalPrice -  order.totalPrice * (commission.commission)/100}} of {{order.totalPrice}}
+        <ion-text class="name" *ngIf="order.method == 'card'">
+           Paying ₹{{order.totalPrice -  order.totalPrice * (commission.commission)/100}} of {{order.totalPrice}}
         </ion-text>
+        <ion-text class="name" *ngIf="order.method == 'cod'">
+          pharmacy Will Pay  ₹{{order.totalPrice * (commission.commission)/100}} of {{order.totalPrice}}
+       </ion-text>
       </div>
       </ion-item>
       <ion-item class="profile-holder" *ngIf="commission.name == 'Refund'">
