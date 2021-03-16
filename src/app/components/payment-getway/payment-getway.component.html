@@ -16,7 +16,7 @@
            Paying ₹{{order.totalPrice -  order.totalPrice * (commission.commission)/100}} of {{order.totalPrice}}
         </ion-text>
         <ion-text class="name" *ngIf="order.method == 'cod'">
-          pharmacy Will Pay  ₹{{order.totalPrice * (commission.commission)/100}} of {{order.totalPrice}}
+          Pharmacy Will Pay  ₹{{order.totalPrice * (commission.commission)/100}} of {{order.totalPrice}}
        </ion-text>
       </div>
       </ion-item>
@@ -113,7 +113,8 @@
   <ion-row class="bottom-row" *ngIf="order && order.patient && order.pharmacy.paymentDetail && commission.name == 'Pay Pharmacy'">
     <ion-col size="12" >
       <ion-button shape="round" size="default" color="light"  expand="full" (click)="payPharmacy()" >
-        <ion-text>PAY PHARMACY</ion-text>
+        <ion-text *ngIf='order.method == "card"'>PAY PHARMACY</ion-text>
+        <ion-text *ngIf='order.method == "cod"'>PAYED BY PHARMACY</ion-text>
       </ion-button>
     </ion-col>
     
