@@ -133,10 +133,9 @@ export class OrdersPage implements OnInit {
             let result = await this.affectCard(order, paymentStatus);
           }
           else if (order.method == 'cod' && paymentStatus.status == 'ERROR'){
-            let paied = order.status == 'delivered' ? 'PAID' : 'NOT PAIED'
-            this.allOrder[paied].ALL.all.push(order);
-            this.allOrder[paied].SUCCESS[order.status].push(order);
-            this.allOrder[paied].SUCCESS.all.push(order);
+            this.allOrder[order.payedByAdmin].ALL.all.push(order);
+            this.allOrder[order.payedByAdmin].SUCCESS[order.status].push(order);
+            this.allOrder[order.payedByAdmin].SUCCESS.all.push(order);
           }
         })
       console.log(this.allOrder);
@@ -148,8 +147,14 @@ export class OrdersPage implements OnInit {
     this.allOrder[order.payedByAdmin].ALL.all.push(order);
     this.allOrder[order.payedByAdmin].ALL[order.status].push(order);
     if (order.paymentStatus && order.paymentStatus.txStatus) {
-      this.allOrder[order.payedByAdmin][order.paymentStatus.txStatus].all.push(order)
-      this.allOrder[order.payedByAdmin][order.paymentStatus.txStatus][order.status].push(order);
+      if (order.paymentStatus.txStatus in this.allOrder[order.payedByAdmin]) {
+        this.allOrder[order.payedByAdmin][order.paymentStatus.txStatus].all.push(order)
+        this.allOrder[order.payedByAdmin][order.paymentStatus.txStatus][order.status].push(order);
+      }
+      else {
+        this.allOrder[order.payedByAdmin].PENDING.all.push(order)
+        this.allOrder[order.payedByAdmin].PENDING[order.status].push(order);
+      }
     }
     else if (order.paymentStatus && !order.paymentStatus.txStatus) {
       this.allOrder[order.payedByAdmin][order.paymentStatus.orderStatus].all.push(order)
